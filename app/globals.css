@@ -127,7 +127,7 @@ p {
   padding-top: 0.12em;
   /* Vietnamese hangs tone marks above and below the letters, so the tight 0.95 of the other
      headings makes lines touch */
-  line-height: 1.12;
+  line-height: 1.22;
 }
 
 /* English translation set under a big Vietnamese heading */

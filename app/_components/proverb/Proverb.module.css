@@ -24,7 +24,8 @@
   font-weight: 900;
   text-transform: uppercase;
   font-size: clamp(2rem, 4.8vw, 4rem);
-  line-height: 0.98;
+  /* tone marks hang above the capitals: 0.98 made the marks of one line touch the line above */
+  line-height: 1.18;
   letter-spacing: -0.01em;
   text-wrap: balance;
   color: var(--gold-300);

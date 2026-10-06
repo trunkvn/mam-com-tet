@@ -348,6 +348,8 @@
 
 .step h3 {
   font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  /* tone marks hang above the capitals; the page's 0.95 lets one line's marks touch the line above */
+  line-height: 1.18;
   margin-top: 0.5rem;
   padding-top: 0.12em;
 }
