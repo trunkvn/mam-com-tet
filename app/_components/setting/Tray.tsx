@@ -71,7 +71,8 @@ export default function Tray({ regions }: { regions: Region[] }) {
     setPinned(null);
   };
 
-  // Photo preview: shown while a plate is hovered or focused, or after it is tapped (pinned).
+  // Photo preview, shown on the plate itself: while a plate is hovered or focused, or after
+  // it is tapped (pinned).
   const [hover, setHover] = useState<number | null>(null);
   const [pinned, setPinned] = useState<number | null>(null);
 
@@ -164,6 +165,16 @@ export default function Tray({ regions }: { regions: Region[] }) {
             onClick={() => setPinned((p) => (p === i ? null : i))}
           >
             <DishArt art={d.art} />
+            {/* the plate turns into its photo. It lives inside the plate, so it
+                turns with the ring and stays upright with the plate, and it never takes the pointer. */}
+            <span className={styles.photo} aria-hidden="true" key={`${regionId}-${d.id}`}>
+              <Image
+                src={d.photo.src}
+                alt={peek === i ? d.photo.alt : ""}
+                fill
+                sizes="(max-width: 899px) 100px, 160px"
+              />
+            </span>
           </button>
         ) : (
           <div className={styles.plate}>
@@ -215,28 +226,6 @@ export default function Tray({ regions }: { regions: Region[] }) {
             {renderSlot(0)}
             <div className={styles.ring} style={{ "--turn": `${turn.toFixed(2)}deg` } as CSSProperties}>
               {dishes.map((_, i) => (i === 0 ? null : renderSlot(i)))}
-            </div>
-
-            {/* photo preview: sits over the middle of the tray and never takes the pointer */}
-            <div className={styles.peek} data-show={peekDish?.photo ? "" : undefined} aria-hidden="true">
-              <div className={styles.peekFrame}>
-                {dishes.map((d, i) =>
-                  d.photo ? (
-                    <Image
-                      key={`${regionId}-${d.id}`}
-                      className={peek === i ? styles.peekOn : ""}
-                      src={d.photo.src}
-                      alt={peek === i ? d.photo.alt : ""}
-                      fill
-                      sizes="(max-width: 899px) 140px, 260px"
-                    />
-                  ) : null,
-                )}
-                <p className={styles.peekName}>
-                  <b lang="vi">{peekDish?.vi}</b>
-                  <span lang="en">{peekDish?.en}</span>
-                </p>
-              </div>
             </div>
           </div>
           <div className={styles.cap} aria-live="polite">
