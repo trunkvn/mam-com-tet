@@ -1,6 +1,7 @@
 .band {
   background: var(--red-950);
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  /* no bottom padding: the thread in Bridge fills the space down to the greeting */
+  padding-bottom: 0;
 }
 
 .fig {

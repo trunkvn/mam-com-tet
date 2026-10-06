@@ -1,0 +1,119 @@
+/* The gold thread between the proverb and the greeting. */
+
+.bridge {
+  position: relative;
+  /* pull the thread up under the tray, past the empty strip at the bottom of the Bloom drawing */
+  margin-top: -1.2rem;
+  color: var(--gold-300);
+  pointer-events: none;
+}
+
+.thread {
+  display: block;
+  margin-inline: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.wide {
+  width: 100%;
+}
+
+.narrow {
+  display: none;
+  width: 100px;
+}
+
+@media (max-width: 899px) {
+  /* here the proverb text, not the tray, is the last thing above the thread: leave a gap, do not
+     pull it up */
+  .bridge {
+    margin-top: 1.4rem;
+  }
+
+  .wide {
+    display: none;
+  }
+
+  .narrow {
+    display: block;
+  }
+}
+
+.flow {
+  stroke-dasharray: 46 26;
+  animation: flow 6s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -72;
+  }
+}
+
+/* a blossom rides the path from start to end and fades in and out at the ends.
+   offset-path, delay and duration are set inline so the three never move in step. */
+.petal {
+  offset-rotate: 0deg;
+  opacity: 0;
+  animation: travel 11s linear infinite;
+}
+
+@keyframes travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  82% {
+    opacity: 0.85;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* ...and turns slowly as it goes. It is a separate inner group so it turns about its own centre. */
+.spin {
+  animation: turn 14s linear infinite;
+}
+
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    scale: 0.6;
+    opacity: 0.5;
+  }
+  to {
+    scale: 1.1;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow,
+  .star,
+  .spin {
+    animation: none;
+  }
+
+  /* with no movement the blossoms would just sit at the start of the thread: leave them out */
+  .petal {
+    animation: none;
+    opacity: 0;
+  }
+}

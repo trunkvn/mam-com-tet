@@ -1,7 +1,8 @@
 .closer {
   background: radial-gradient(90% 90% at 50% 100%, var(--red-800), var(--red-950));
   text-align: center;
-  padding-block: clamp(5rem, 10vw, 8rem) 3rem;
+  /* short at the top: the thread from the proverb arrives here, so it needs no empty run-up */
+  padding-block: clamp(2.5rem, 5vw, 4rem) 3rem;
   overflow: hidden;
 }
 

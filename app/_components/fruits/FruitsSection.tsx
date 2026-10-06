@@ -14,8 +14,8 @@ export default function FruitsSection() {
               <p className="kick">
                 Mâm ngũ quả <span lang="en">The five-fruit tray</span>
               </p>
-              <BiHeading id="fr-title" en="Five fruits, three ways to choose.">
-                Năm quả, <em>ba cách chọn.</em>
+              <BiHeading id="fr-title" en="Five fruits, three regions.">
+                Năm quả, <em>ba miền.</em>
               </BiHeading>
               <p className={styles.intro} lang="en">
                 A stand of five fruits sits on the altar beside the dishes. Five is often read as
