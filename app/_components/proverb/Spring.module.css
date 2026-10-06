@@ -1,0 +1,128 @@
+.spring {
+  display: block;
+  width: min(100%, 420px);
+  height: auto;
+  color: var(--gold-300);
+  overflow: visible;
+}
+
+.halo {
+  transform-origin: 200px 170px;
+  animation: spin 200s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* dash pattern 18 + 14 = 32 long; one full pattern per loop keeps it seamless */
+.flow {
+  stroke-dasharray: 18 14;
+  animation: flow 1.6s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+/* a drop forms at the spring now and then */
+.drip {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: drip 4.2s ease-in infinite;
+}
+
+@keyframes drip {
+  0% {
+    opacity: 0;
+    scale: 0.3;
+    translate: 0 -2px;
+  }
+  25% {
+    opacity: 1;
+    scale: 1;
+  }
+  80% {
+    opacity: 1;
+    translate: 0 6px;
+  }
+  100% {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+/* a petal floats down the stream; only where motion paths exist, otherwise it stays hidden */
+.petal {
+  opacity: 0;
+}
+
+@supports (offset-path: path("M0 0")) {
+  .petal {
+    offset-distance: 0%;
+    animation: float 12s linear infinite;
+  }
+}
+
+@keyframes float {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  92% {
+    opacity: 0.85;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* rings spreading across the water in the cup */
+.ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: ripple 3.2s ease-out infinite;
+}
+
+.r1 {
+  animation-delay: 1.6s;
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0.8;
+    scale: 0.5;
+  }
+  100% {
+    opacity: 0;
+    scale: 2.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo,
+  .flow,
+  .drip,
+  .petal,
+  .ring {
+    animation: none;
+  }
+
+  .drip {
+    opacity: 1;
+  }
+
+  .ring.r0 {
+    opacity: 0.5;
+    scale: 1.6;
+  }
+}

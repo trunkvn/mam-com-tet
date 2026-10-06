@@ -1,0 +1,85 @@
+/* ==========================================================================
+   BƯỚC 2: biến danh sách dọc thành HÀNG CUỘN NGANG, tự "hít" vào từng thẻ.
+   Toàn bộ chỉ bằng CSS. Chưa có dòng JavaScript nào.
+   (Đây là phần trích từ .hs trong Days.module.css, đã bỏ các phần của bước sau.)
+   ========================================================================== */
+
+.row {
+  list-style: none; /* bỏ dấu chấm/số mặc định của <ol> */
+  margin: 0;
+
+  /* (1) XẾP NGANG: mặc định flex xếp các con theo hàng ngang thay vì chồng dọc */
+  display: flex;
+  gap: 1.1rem; /* khoảng cách giữa các thẻ */
+
+  /* (2) CHO PHÉP CUỘN NGANG: nội dung dài hơn khung thì hiện khả năng cuộn.
+         Chỉ trục x, vì trục dọc đã có trang cuộn lo. */
+  overflow-x: auto;
+
+  /* (3) SNAP: khi thả tay, hàng sẽ tự trượt cho khớp một điểm "hít".
+         x     = chỉ áp dụng cho trục ngang
+         mandatory = BẮT BUỘC hít (khác `proximity` là chỉ hít khi đã gần) */
+  scroll-snap-type: x mandatory;
+
+  /* (4) LỀ TRÁI/PHẢI cho hàng, để thẻ đầu thẳng hàng với nội dung trang (.wrap).
+         - Trang rộng hơn 1180px: lề = (bề rộng - 1180px) / 2, đúng bằng phần lề của .wrap.
+         - Trang hẹp hơn: max() chọn 1.5rem, tối thiểu luôn có lề.
+         Padding dọc: 2.4rem phía trên, 1.2rem phía dưới. */
+  padding: 2.4rem max(1.5rem, calc((100% - 1180px) / 2)) 1.2rem;
+
+  /* (5) Nói cho snap biết: "điểm hít" cách mép khung một đoạn đúng bằng lề trên.
+         Nếu thiếu dòng này, thẻ sẽ hít sát mép khung và đè lên phần lề.
+         Giá trị phải GIỐNG hệt padding ngang ở (4). */
+  scroll-padding-inline: max(1.5rem, calc((100% - 1180px) / 2));
+
+  /* (6) Ẩn thanh cuộn cho gọn. Hai dòng: Firefox dùng dòng này, Chrome/Safari dùng ::-webkit-scrollbar */
+  scrollbar-width: none;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mỗi thẻ là một <li> con trực tiếp của hàng (dấu > nghĩa là "con trực tiếp") */
+.row > li {
+  /* KHÔNG co lại: không có dòng này, flex sẽ ép cả 5 thẻ co nhỏ cho vừa khung
+     và hàng sẽ không còn gì để cuộn. */
+  flex: none;
+
+  /* Điểm hít của thẻ này là MÉP TRÁI (start) của nó */
+  scroll-snap-align: start;
+
+  /* Rộng 360px, nhưng trên điện thoại nhỏ thì tối đa 80% màn hình
+     (chừa lại một ít thẻ kế bên để người dùng biết còn thẻ để vuốt) */
+  width: min(360px, 80vw);
+
+  /* Để <article> bên trong kéo dài bằng chiều cao <li> (xem .day trong Days.module.css) */
+  display: flex;
+}
+
+/* ==========================================================================
+   BƯỚC 8: thêm cho việc KÉO BẰNG CHUỘT (chỉ Step8 dùng ba class này).
+   Ba class này phải nằm SAU .row trong file: cùng độ ưu tiên thì class viết sau thắng,
+   nên `.holding` mới ghi đè được `scroll-snap-type` của `.row`.
+   ========================================================================== */
+
+/* Con trỏ hình bàn tay mở: gợi ý "kéo được" */
+.grab {
+  cursor: grab;
+}
+
+/* Đang giữ chuột kéo */
+.holding {
+  cursor: grabbing; /* bàn tay nắm */
+  /* TẮT snap khi đang kéo. Snap mandatory sẽ liên tục giằng hàng về thẻ gần nhất,
+     đúng lúc tay đang kéo -> hàng bị giật, không đi mượt theo chuột được. */
+  scroll-snap-type: none;
+  /* Không cho bôi đen chữ khi kéo chuột qua */
+  user-select: none;
+}
+
+/* Vừa thả chuột: hàng đang trượt về thẻ gần nhất.
+   Vẫn tắt snap, để animation trượt không bị snap chen ngang. */
+.settling {
+  scroll-snap-type: none;
+}

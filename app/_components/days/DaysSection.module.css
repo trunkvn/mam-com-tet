@@ -1,0 +1,10 @@
+.days {
+  background: linear-gradient(var(--red-900), var(--red-800));
+  overflow: hidden;
+  padding-block: clamp(5rem, 10vw, 8.5rem);
+}
+
+.intro {
+  margin-top: 1.2rem;
+  max-width: 36rem;
+}

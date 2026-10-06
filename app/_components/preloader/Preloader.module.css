@@ -1,0 +1,187 @@
+.pre {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(120% 90% at 50% 40%, var(--red-800), var(--red-950) 70%);
+  transition: opacity 0.8s ease;
+  /* Failsafe: if the script never runs, the splash still goes away on its own. */
+  animation: failsafe 0.01s linear 7s forwards;
+}
+
+.pre[data-phase="leaving"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* the content fades a little ahead of the background */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--gold-300);
+  transition:
+    opacity 0.45s ease,
+    scale 0.8s ease;
+}
+
+.pre[data-phase="leaving"] .content {
+  opacity: 0;
+  scale: 1.08;
+}
+
+.sun {
+  width: clamp(72px, 14vw, 104px);
+  height: auto;
+  display: block;
+  margin: 0 auto 1.4rem;
+  /* once drawn, the sun turns */
+  animation: turn 16s linear infinite;
+}
+
+/* each stroke draws itself in, one after another */
+.draw > * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+}
+
+.draw > :nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.draw > :nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.title {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.5s forwards;
+}
+
+.sub {
+  margin-top: 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.7s forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.bar {
+  width: min(180px, 50vw);
+  height: 2px;
+  margin: 1.6rem auto 0;
+  background: rgba(240, 190, 107, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--gold-300);
+  /* creeps towards the end while loading, then runs the rest of the way as the screen fades */
+  animation: fill 2.6s cubic-bezier(0.1, 0.6, 0.3, 1) forwards;
+}
+
+.pre[data-phase="leaving"] .bar i {
+  width: 100%;
+  animation: none;
+  transition: width 0.3s ease;
+}
+
+.note {
+  margin: 2rem auto 0;
+  max-width: 30rem;
+  padding: 0 1.5rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--cream-dim);
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.9s forwards;
+}
+
+.note span {
+  display: block;
+}
+
+.note span:first-child {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gold-200);
+  margin-bottom: 0.3rem;
+}
+
+@keyframes fill {
+  to {
+    width: 90%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun {
+    animation: none;
+  }
+
+  .draw > *,
+  .title,
+  .sub,
+  .note {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  /* the fade is quick, and the content does not drift */
+  .pre {
+    transition-duration: 0.3s;
+  }
+
+  .pre[data-phase="leaving"] .content {
+    scale: 1;
+  }
+}

@@ -1,0 +1,250 @@
+/* Six red envelopes on a dark table. Each is drawn with stacked layers:
+   back, note, front pocket, the V crease, the flap, the seal and the label. */
+
+.envs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* an open note rises ~196px above its envelope, so the rows need room for it */
+  gap: 14rem 2.2rem;
+  margin-top: 14rem;
+  padding-bottom: 1rem;
+}
+
+.env {
+  position: relative;
+  height: 250px;
+  rotate: var(--r, 0deg);
+  transition:
+    rotate 0.4s var(--ease),
+    translate 0.4s var(--ease);
+}
+
+.env:hover {
+  translate: 0 -4px;
+}
+
+.env > * {
+  position: absolute;
+}
+
+.back {
+  inset: 0;
+  background: var(--red-700);
+  border-radius: 8px;
+  box-shadow:
+    0 26px 40px -22px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px var(--line);
+}
+
+.paper {
+  --vi: var(--red-700);
+  left: 7%;
+  right: 7%;
+  bottom: 10px;
+  height: 232px;
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  z-index: 2;
+  overflow: hidden;
+  cursor: pointer;
+  /* closing: the note slides back in straight away */
+  transition: translate 0.75s var(--ease);
+  box-shadow: 0 0 0 1px rgba(58, 7, 16, 0.2);
+}
+
+/* opening: the note waits until the flap has gone behind it */
+.open .paper {
+  translate: 0 -196px;
+  transition-delay: 0.15s;
+}
+
+.paper b {
+  display: block;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 110;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--red-700);
+  padding-top: 0.1em;
+}
+
+.paper em {
+  display: block;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  color: rgba(58, 7, 16, 0.6);
+}
+
+.paper > span {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+.front {
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(var(--red-600), var(--red-800));
+  clip-path: polygon(0 0, 50% 68%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 8px;
+}
+
+.vline {
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.flap {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 68%;
+  z-index: 5;
+  transform-origin: top;
+  background: linear-gradient(var(--red-500), var(--red-600));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  /* Closing: wait for the note to be down, then fold shut. The flap has no perspective, so it
+     is edge-on (invisible) about 0.12s into its 0.6s turn with this easing; that is the moment
+     it swaps between the front layer and the back layer, so it never hides the note. */
+  transition:
+    transform 0.6s var(--ease) 0.4s,
+    z-index 0s 0.52s;
+}
+
+.flap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+  transition:
+    transform 0.6s var(--ease),
+    z-index 0s 0.12s;
+}
+
+.seal {
+  left: 50%;
+  top: calc(68% - 20px);
+  translate: -50% 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gold-300);
+  color: var(--red-800);
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 3px var(--red-600);
+  /* closing: the seal comes back once the flap is shut */
+  transition:
+    opacity 0.3s 0.8s,
+    scale 0.3s 0.8s;
+}
+
+.seal svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* the sun on the seal turns while the envelope is hovered or focused */
+.env:hover .seal svg,
+.env:has(.hit:focus-visible) .seal svg {
+  animation: seal-turn 3s linear infinite;
+}
+
+@keyframes seal-turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.open .seal {
+  opacity: 0;
+  scale: 0.6;
+  transition:
+    opacity 0.3s,
+    scale 0.3s;
+}
+
+.label {
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  z-index: 4;
+  text-align: center;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 110;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  color: var(--gold-300);
+}
+
+.label small {
+  display: block;
+  font-family: var(--body);
+  font-variation-settings: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: var(--cream-faint);
+}
+
+/* the real button sits over the envelope and takes the clicks and the focus ring */
+.hit {
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+  .envs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .envs {
+    grid-template-columns: 1fr;
+    margin-top: 13rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper,
+  .flap,
+  .seal,
+  .open .paper,
+  .open .flap,
+  .open .seal {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+
+  .env:hover .seal svg,
+  .env:has(.hit:focus-visible) .seal svg {
+    animation: none;
+  }
+}

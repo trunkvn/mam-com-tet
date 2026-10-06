@@ -1,0 +1,96 @@
+.incense {
+  display: block;
+  width: min(100%, 340px);
+  height: auto;
+  justify-self: center;
+  color: var(--gold-300);
+  overflow: visible;
+}
+
+/* the halo turns very slowly */
+.halo {
+  transform-origin: 160px 190px;
+  animation: spin 160s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* each smoke line sways a little, out of step with its neighbours */
+.smoke {
+  animation: sway 7s ease-in-out infinite alternate;
+}
+
+.s1 {
+  animation-duration: 8.5s;
+  animation-delay: -2s;
+}
+
+.s2 {
+  animation-duration: 6.5s;
+  animation-delay: -4s;
+}
+
+@keyframes sway {
+  from {
+    translate: -5px 0;
+  }
+  to {
+    translate: 6px 0;
+  }
+}
+
+/* dashes travel up the path; the dash pattern is 46 + 26 = 72 long */
+.flow {
+  stroke-dasharray: 46 26;
+  animation: flow 5.5s linear infinite;
+}
+
+.s1 .flow {
+  animation-duration: 7s;
+}
+
+.s2 .flow {
+  animation-duration: 6s;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -72;
+  }
+}
+
+/* embers breathe */
+.ember {
+  animation: glow 3.2s ease-in-out infinite;
+}
+
+.e1 {
+  animation-delay: -1.1s;
+}
+
+.e2 {
+  animation-delay: -2.1s;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo,
+  .smoke,
+  .flow,
+  .ember {
+    animation: none;
+  }
+}

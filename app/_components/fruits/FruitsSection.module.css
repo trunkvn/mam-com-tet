@@ -1,0 +1,43 @@
+/* A cream break between the dark sections. Overrides the shared section furniture for light paper. */
+.paper {
+  background: var(--cream);
+  color: var(--ink);
+  padding-block: clamp(5rem, 10vw, 8.5rem);
+  /* the region switch picks these up */
+  --toggle-fg: var(--red-700);
+  --toggle-bg: var(--cream);
+  /* Vietnamese words inside English text: dark red on the cream paper */
+  --vi: var(--red-700);
+}
+
+.paper :global(.kick) {
+  color: var(--red-600);
+}
+
+.paper :global(.kick)::before {
+  background: var(--red-600);
+}
+
+.paper :global(.kick) span {
+  color: rgba(58, 7, 16, 0.6);
+}
+
+.paper :global(.h2) {
+  color: var(--red-700);
+}
+
+.paper :global(.h2) em {
+  color: var(--ink);
+}
+
+.paper :global(.enline) {
+  color: rgba(58, 7, 16, 0.72);
+}
+
+.intro {
+  margin-top: 1.2rem;
+  max-width: 38rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(58, 7, 16, 0.78);
+}

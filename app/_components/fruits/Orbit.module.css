@@ -1,0 +1,123 @@
+.orbit {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  justify-self: center;
+  color: var(--red-700);
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: turn 160s linear infinite reverse;
+}
+
+.centre {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, var(--red-600), var(--red-800) 80%);
+  box-shadow:
+    0 0 0 2px var(--gold-300),
+    0 0 0 8px rgba(133, 12, 23, 0.14);
+  color: var(--gold-300);
+}
+
+.centre svg {
+  width: 74%;
+  height: 74%;
+}
+
+/* fill-box makes "center" mean the middle of the blossom itself, not of the whole viewBox */
+.bloom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 5s ease-in-out infinite alternate;
+}
+
+/* the ring of plates turns once in 70 seconds */
+.ring {
+  position: absolute;
+  inset: 0;
+  animation: turn 70s linear infinite;
+}
+
+.plate {
+  position: absolute;
+  width: 25%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  /* no percentage padding: it would be taken from the width of the whole ring, not of the plate */
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 38%, var(--red-600), var(--red-800) 80%, var(--red-950));
+  box-shadow:
+    0 0 0 1.5px var(--gold-300),
+    0 0 0 6px rgba(133, 12, 23, 0.14),
+    0 12px 22px -8px rgba(58, 7, 16, 0.5);
+  /* 1: counter-turn so the fruit stays upright; 2: pop in */
+  animation:
+    unturn 70s linear infinite,
+    pop 0.7s var(--ease) both;
+}
+
+/* sized by width and aspect ratio: a percentage height collapses inside a plate whose own height
+   comes only from its aspect ratio */
+.plate svg {
+  width: 74%;
+  height: auto;
+  aspect-ratio: 1;
+  display: block;
+  overflow: visible;
+}
+
+/* the drawings are scaled up inside the svg, so keep outlines at their drawn weight */
+.plate svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes unturn {
+  to {
+    rotate: -360deg;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
+@keyframes breathe {
+  from {
+    scale: 0.94;
+  }
+  to {
+    scale: 1.06;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rings,
+  .ring,
+  .plate,
+  .bloom {
+    animation: none;
+  }
+}

@@ -1,0 +1,188 @@
+.rail {
+  position: fixed;
+  z-index: 80;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--rail);
+  background: var(--red-950);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 18px;
+}
+
+.brand {
+  color: var(--gold-300);
+  text-decoration: none;
+  display: block;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  display: block;
+  /* the sun turns slowly, a full circle in 24 seconds */
+  animation: turn 24s linear infinite;
+}
+
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.brandName {
+  display: none;
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.nav a {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  text-decoration: none;
+}
+
+/* the diamond */
+.nav a::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid var(--gold-300);
+  rotate: 45deg;
+  transition:
+    background 0.2s,
+    inset 0.2s;
+}
+
+.nav a.on::before {
+  background: var(--gold-300);
+  inset: 5px;
+}
+
+.nav a:hover::before,
+.nav a:focus-visible::before {
+  background: rgba(240, 190, 107, 0.45);
+}
+
+.nav a.on:hover::before {
+  background: var(--gold-300);
+}
+
+/* the label that slides out to the right of a dot */
+.tip {
+  position: absolute;
+  left: calc(100% + 18px);
+  top: 50%;
+  translate: -6px -50%;
+  white-space: nowrap;
+  background: var(--red-950);
+  border: 1px solid var(--line);
+  padding: 0.35rem 0.8rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    translate 0.2s;
+}
+
+.tip b {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+}
+
+.tip small {
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--cream-faint);
+}
+
+.nav a:hover .tip,
+.nav a:focus-visible .tip {
+  opacity: 1;
+  translate: 0 -50%;
+}
+
+/* readable name for screen readers, since the visible label only shows on hover */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.tag {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+/* narrow screens: a bar across the top */
+@media (max-width: 899px) {
+  .rail {
+    position: sticky;
+    width: auto;
+    height: var(--topbar);
+    bottom: auto;
+    flex-direction: row;
+    padding: 0 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .brandName {
+    display: block;
+    font-family: var(--display);
+    font-variation-settings: "wdth" 110;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+  }
+
+  .nav,
+  .tag {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav a::before,
+  .tip {
+    transition: none;
+  }
+
+  .logo {
+    animation: none;
+  }
+}

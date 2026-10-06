@@ -1,0 +1,347 @@
+/* Hero: a framed Tết poster. Greek-key frieze top and bottom, red couplets at the sides,
+   outlined "Tết" under extended "Mâm Cơm", a spinning seal, and a marquee of dishes. */
+
+.poster {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(100svh, 980px);
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(
+    75% 62% at 50% 36%,
+    var(--red-600),
+    var(--red-800) 56%,
+    var(--red-950)
+  );
+}
+
+.frieze {
+  height: 26px;
+  flex: none;
+  opacity: 0.75;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='26' viewBox='0 0 28 26'%3E%3Cpath d='M3 23V3h22v14H9V9h10v4' fill='none' stroke='%23f0be6b' stroke-width='1.5'/%3E%3C/svg%3E")
+    repeat-x center;
+  border-block: 1px solid var(--line);
+}
+
+/* blossom branches hanging from the top corners; the right one is a mirror of the left */
+.branch {
+  position: absolute;
+  z-index: 1;
+  top: 26px;
+  /* stays narrower than the seal's offset from the right edge (about 14vw) */
+  width: clamp(130px, 12.5vw, 240px);
+  height: auto;
+  color: var(--gold-300);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.branchL {
+  left: 0;
+}
+
+.branchR {
+  right: 0;
+  scale: -1 1;
+}
+
+/* couplets */
+.couplet {
+  position: absolute;
+  z-index: 2;
+  top: 26px;
+  bottom: 26px;
+  width: clamp(48px, 5.4vw, 76px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: auto;
+  height: min(66%, 560px);
+  background: linear-gradient(var(--red-600), var(--red-700));
+  border-radius: 3px;
+  box-shadow:
+    inset 0 0 0 1px var(--gold-400),
+    inset 0 0 0 6px var(--red-700),
+    inset 0 0 0 7px var(--line),
+    0 24px 50px -20px rgba(0, 0, 0, 0.7);
+}
+
+.coupletL {
+  left: clamp(1rem, 4vw, 3.5rem);
+}
+
+.coupletR {
+  right: clamp(1rem, 4vw, 3.5rem);
+}
+
+.couplet span {
+  writing-mode: vertical-rl;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 70;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: clamp(0.95rem, 1.5vw, 1.35rem);
+  color: var(--gold-300);
+  white-space: nowrap;
+}
+
+.couplet::before,
+.couplet::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  background: var(--gold-300);
+  translate: -50% 0;
+  rotate: 45deg;
+}
+
+.couplet::before {
+  top: 14px;
+}
+
+.couplet::after {
+  bottom: 14px;
+}
+
+/* centre column */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: clamp(2rem, 5vh, 4rem) clamp(6.5rem, 11vw, 9rem) 2rem; /* clears the couplets */
+  position: relative;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.eyebrow span {
+  display: block;
+  color: var(--cream-faint);
+  letter-spacing: 0.18em;
+  margin-top: 0.3rem;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+.badge {
+  position: absolute;
+  z-index: 3;
+  width: clamp(96px, 11vw, 150px);
+  right: clamp(9%, 14vw, 16%);
+  top: 6%;
+  color: var(--gold-300);
+}
+
+.badge svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: spin 40s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* Title. DOM order reads "Mâm Cơm Tết"; column-reverse stacks "Tết" above it. */
+.title {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  margin-top: 1.2rem;
+  line-height: 0.8;
+}
+
+.t1 {
+  /* Capped by viewport height too, so the diacritics on "Ế" clear the eyebrow. */
+  font-size: clamp(7.5rem, min(27vw, 34svh), 24rem);
+  padding-top: 0.3em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--gold-300);
+  background: repeating-radial-gradient(
+    circle at 50% 100%,
+    rgba(240, 190, 107, 0.55) 0 1.5px,
+    transparent 1.5px 14px
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.t2 {
+  position: relative;
+  z-index: 2;
+  margin-top: -0.2em;
+  font-size: clamp(2.8rem, 10.4vw, 9.4rem);
+  color: var(--cream);
+  text-shadow: 0.04em 0.05em 0 var(--red-950);
+}
+
+.titleEn {
+  position: relative;
+  z-index: 2;
+  margin-top: 1rem;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  color: var(--cream-dim);
+}
+
+/* lede, stats, call to action */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) auto auto;
+  align-items: center;
+  gap: 1.6rem 3rem;
+  width: min(1000px, 100%);
+  margin-top: clamp(1.4rem, 3vh, 2.4rem);
+  text-align: left;
+}
+
+.lede {
+  font-size: clamp(0.95rem, 0.8vw + 0.8rem, 1.15rem);
+  line-height: 1.6;
+  max-width: 32rem;
+  text-wrap: pretty;
+}
+
+.qty {
+  display: flex;
+  gap: 1.6rem;
+  margin: 0;
+}
+
+.qty div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.qty dd {
+  margin: 0;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100;
+  font-weight: 800;
+  font-size: 2.1rem;
+  line-height: 1;
+  color: var(--gold-300);
+  font-variant-numeric: tabular-nums;
+}
+
+.qty dt {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  background: var(--gold-400);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--gold-200);
+  transform: translateY(2px);
+}
+
+/* marquee */
+.marquee {
+  flex: none;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  background: rgba(42, 3, 7, 0.7);
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: slide 50s linear infinite;
+}
+
+.marquee span {
+  padding: 0.9rem 1.4rem;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.1rem, 2.2vw, 1.7rem);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 2.8rem;
+}
+
+.marquee span::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--gold-300);
+  rotate: 45deg;
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* the branches would collide with the seal on narrower screens */
+@media (max-width: 1099px) {
+  .branch {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .couplet {
+    display: none;
+  }
+
+  .content {
+    padding-inline: 1.5rem;
+  }
+
+  .badge {
+    right: 6%;
+    top: 3%;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack,
+  .badge svg {
+    animation: none;
+  }
+}

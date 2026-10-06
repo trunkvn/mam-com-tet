@@ -1,0 +1,640 @@
+/* Scroll to set the tray: a sticky disc on the left fills with one dish per step on the right. */
+
+.setting {
+  position: relative;
+  /* clip, not hidden: keeps the big background art from widening the page without
+     turning the section into a scroll container (which would break the sticky tray) */
+  overflow: clip;
+  background: linear-gradient(var(--red-950), var(--red-900) 14%);
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* text on the left, the incense drawing fills the space on the right */
+.headRow {
+  display: grid;
+  grid-template-columns: minmax(0, 46rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem clamp(1.5rem, 4vw, 4rem);
+}
+
+/* the proverb closing the section, under the last step */
+.thanks {
+  padding-top: clamp(1rem, 3vw, 2rem);
+}
+
+.head {
+  padding-block: clamp(5rem, 10vw, 8rem) 2rem;
+}
+
+@media (max-width: 899px) {
+  .headRow {
+    grid-template-columns: 1fr;
+  }
+
+  .headRow > svg {
+    display: none;
+  }
+}
+
+.intro {
+  margin-top: 1.2rem;
+  max-width: 34rem;
+}
+
+.legend {
+  margin-top: 0.9rem;
+  max-width: 34rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.4rem;
+  padding-bottom: 0.5rem;
+}
+
+.note {
+  font-size: 0.9rem;
+  max-width: 30rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(1.5rem, 4vw, 5rem);
+}
+
+/* sticky stage */
+.stage {
+  position: sticky;
+  top: var(--topbar);
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+}
+
+.tray {
+  position: relative;
+  width: min(560px, 100%, 70svh);
+  aspect-ratio: 1;
+}
+
+.glow {
+  position: absolute;
+  inset: -38%;
+  background: radial-gradient(circle, rgba(207, 34, 48, 0.4), rgba(170, 16, 30, 0.14) 38%, transparent 62%);
+  transition: opacity 0.9s var(--ease);
+  pointer-events: none;
+}
+
+.disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--red-700), var(--red-800) 55%, var(--red-950));
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 50px 90px -30px rgba(0, 0, 0, 0.85);
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--gold-300);
+}
+
+.prog {
+  position: absolute;
+  inset: -3.2%;
+  width: 106.4%;
+  height: 106.4%;
+  rotate: -90deg;
+}
+
+.prog circle {
+  fill: none;
+  stroke-width: 0.8;
+}
+
+.trk {
+  stroke: rgba(240, 190, 107, 0.18);
+}
+
+.bar {
+  stroke: var(--gold-300);
+  stroke-linecap: round;
+  stroke-dasharray: 301.6;
+  stroke-dashoffset: 301.6;
+  transition: stroke-dashoffset 0.8s var(--ease);
+}
+
+/* a plate that opens a photo: a real button, so it takes focus and the keyboard */
+.plateBtn {
+  border: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ring .plateBtn {
+  pointer-events: auto;
+}
+
+.plateBtn:disabled,
+.ring .plateBtn:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.slot.on .plateBtn:hover,
+.slot.on .plateBtn:focus-visible,
+.slot.on.peeked .plateBtn {
+  opacity: 1;
+  box-shadow:
+    0 0 0 2px var(--gold-300),
+    0 0 0 9px rgba(240, 190, 107, 0.2),
+    0 10px 22px -6px rgba(0, 0, 0, 0.75);
+}
+
+/* photo card over the middle of the tray */
+.peek {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  aspect-ratio: 4 / 3;
+  translate: -50% -50%;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.92;
+  transition:
+    opacity 0.25s var(--ease),
+    scale 0.35s var(--ease);
+}
+
+.peek[data-show] {
+  opacity: 1;
+  scale: 1;
+}
+
+.peekFrame {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--red-950);
+  box-shadow:
+    0 0 0 2px var(--gold-300),
+    0 0 0 6px var(--red-950),
+    0 0 0 7px rgba(240, 190, 107, 0.45),
+    0 26px 50px -16px rgba(0, 0, 0, 0.85);
+}
+
+/* every photo sits stacked; the one being previewed fades in over the others */
+.peekFrame img {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.peekFrame img.peekOn {
+  opacity: 1;
+}
+
+.peekName {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.6rem 0.8rem 0.6rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  background: linear-gradient(transparent, rgba(42, 3, 7, 0.88));
+  line-height: 1.2;
+}
+
+.peekName b {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 110;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(0.78rem, 1.2vw, 1rem);
+  color: var(--cream);
+}
+
+.peekName span {
+  font-size: 0.66rem;
+  color: var(--gold-200);
+}
+
+.hint {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--cream-faint);
+  text-align: center;
+}
+
+/* the ring of seven turns as a whole; plates counter-turn so they stay upright */
+.ring {
+  position: absolute;
+  inset: 0;
+  /* the ring covers the whole tray, centre plate included; only its plates take the pointer */
+  pointer-events: none;
+  transform: rotate(var(--turn, 0deg));
+  transition: transform 0.9s var(--ease);
+}
+
+/* dish slots on the tray */
+.slot {
+  position: absolute;
+  translate: -50% -50%;
+  aspect-ratio: 1;
+}
+
+.slot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(240, 190, 107, 0.4);
+}
+
+.plate {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, var(--red-500), var(--red-800) 82%);
+  box-shadow:
+    0 0 0 1px rgba(240, 190, 107, 0.6),
+    0 10px 22px -6px rgba(0, 0, 0, 0.75);
+  color: var(--gold-300);
+  padding: 15%;
+  opacity: 0;
+  transform: translateY(-36px) scale(0.55);
+  rotate: calc(var(--turn, 0deg) * -1);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.7s var(--ease),
+    rotate 0.9s var(--ease),
+    box-shadow 0.4s;
+}
+
+.on .plate {
+  opacity: 0.72;
+  transform: none;
+}
+
+.cur .plate {
+  opacity: 1;
+  transform: scale(1.12);
+  color: var(--gold-200);
+  box-shadow:
+    0 0 0 2px var(--gold-300),
+    0 0 0 10px rgba(240, 190, 107, 0.2),
+    0 0 46px rgba(240, 190, 107, 0.4);
+  z-index: 2;
+}
+
+.cap {
+  text-align: center;
+  min-height: 6.4rem;
+}
+
+.cap b {
+  display: block;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: var(--gold-300);
+  font-variant-numeric: tabular-nums;
+}
+
+.cap span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+/* steps */
+.steps {
+  padding-block: 10svh;
+}
+
+.step {
+  min-height: 78svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0.28;
+  transition: opacity 0.5s;
+}
+
+.act {
+  opacity: 1;
+}
+
+.stepNo {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 900;
+  font-size: clamp(4.6rem, 9vw, 8rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--gold-300);
+}
+
+.stepEnd .stepNo {
+  color: var(--gold-300);
+  -webkit-text-stroke: 0;
+}
+
+.stepMeta {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-top: 0.8rem;
+}
+
+.step h3 {
+  font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  margin-top: 0.5rem;
+  padding-top: 0.12em;
+}
+
+.say {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--cream-faint);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.en {
+  font-weight: 500;
+  color: var(--gold-200);
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.q {
+  font-style: italic;
+  color: var(--gold-200);
+  margin-top: 1rem;
+}
+
+.txt {
+  margin-top: 0.6rem;
+  color: var(--cream-dim);
+  font-size: 0.95rem;
+  max-width: 34rem;
+}
+
+.rite {
+  list-style: none;
+  margin: 1.3rem 0 0;
+  padding: 0;
+  max-width: 34rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.rite li {
+  border-top: 1px solid var(--line);
+  padding-top: 0.6rem;
+}
+
+.rite b {
+  display: block;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 110;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  line-height: 1.1;
+  color: var(--gold-300);
+}
+
+.rite i {
+  font-family: var(--body);
+  font-variation-settings: normal;
+  text-transform: none;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--cream-faint);
+  margin-left: 0.5rem;
+}
+
+.rite span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+}
+
+.beside {
+  margin-top: 1.6rem;
+  max-width: 34rem;
+}
+
+.besideHead {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  font-weight: 600;
+}
+
+.beside ul {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.beside li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.beside li i {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, var(--red-500), var(--red-800) 80%);
+  box-shadow: 0 0 0 1px rgba(240, 190, 107, 0.5);
+  color: var(--gold-300);
+  padding: 8px;
+}
+
+.beside b {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.beside em {
+  font-style: italic;
+  font-size: 0.74rem;
+  color: var(--cream-faint);
+  margin-left: 0.3rem;
+}
+
+.beside small {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  margin-top: 0.1rem;
+}
+
+.besideFoot {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--cream-faint);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 1.4rem;
+  margin: 1.3rem 0 0;
+  max-width: 34rem;
+}
+
+.facts div {
+  border-top: 1px solid var(--line);
+  padding-top: 0.5rem;
+  min-width: 0;
+}
+
+.facts dt {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  font-weight: 600;
+}
+
+.facts dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@media (max-width: 899px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* the tray shrinks into a pinned strip at the top while the steps scroll underneath */
+  .stage {
+    top: var(--topbar);
+    height: 46svh;
+    padding-block: 0.6rem;
+    background: linear-gradient(var(--red-900) 88%, transparent);
+    z-index: 5;
+    gap: 0.5rem;
+  }
+
+  .tray {
+    width: min(100%, 31svh);
+  }
+
+  .cap {
+    min-height: 0;
+  }
+
+  .cap b {
+    font-size: 1.7rem;
+  }
+
+  .cap span {
+    font-size: 0.6rem;
+    margin-top: 0.1rem;
+  }
+
+  .steps {
+    padding-block: 4svh;
+  }
+
+  .step {
+    min-height: 62svh;
+  }
+}
+
+@media (max-width: 560px) {
+  .facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 899px) {
+  .peek {
+    width: 52%;
+  }
+
+  .hint {
+    display: none;
+  }
+
+  /* the card is small here: the Vietnamese name alone */
+  .peekName span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate,
+  .bar {
+    transition-duration: 0.01ms;
+  }
+
+  /* no turning at all: the dishes keep their places */
+  .ring {
+    transform: none;
+    transition: none;
+  }
+
+  .glow {
+    transition: none;
+  }
+
+  .plate {
+    rotate: none;
+  }
+
+  .peek,
+  .peekFrame img {
+    transition: none;
+  }
+}

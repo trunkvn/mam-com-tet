@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
+/* Lacquer red + gold line. Single dark theme by design. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --red-950: #2a0307;
+  --red-900: #430509;
+  --red-800: #62080f;
+  --red-700: #850c17;
+  --red-600: #aa101e;
+  --red-500: #cf2230;
+  --gold-400: #e3a94a;
+  --gold-300: #f0be6b;
+  --gold-200: #f7d9a0;
+  --cream: #f7efe0;
+  --cream-dim: #dccdb4;
+  --cream-faint: rgba(247, 239, 224, 0.66);
+  --ink: #3a0710;
+  --line: rgba(240, 190, 107, 0.28);
+  --display: var(--font-archivo), "Arial Black", Impact, sans-serif;
+  --body: var(--font-be-vietnam-pro), system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* the fixed rail on wide screens; on narrow ones it becomes a sticky bar, --topbar tall,
+     which sticky sections and anchor jumps must clear */
+  --rail: 56px;
+  --topbar: 0px;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--topbar);
+  /* the loading screen locks scrolling; keep room for the scrollbar so the page does not jump
+     sideways when it comes back */
+  scrollbar-gutter: stable;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--red-900);
+  color: var(--cream);
+  font-family: var(--body);
+  font-size: clamp(0.96rem, 0.45vw + 0.88rem, 1.08rem);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-left: var(--rail);
+}
+
+@media (max-width: 899px) {
+  :root {
+    --rail: 0px;
+    --topbar: 54px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-300);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+::selection {
+  background: var(--gold-300);
+  color: var(--red-900);
+}
+
+/* shared section furniture */
+.wrap {
+  width: min(1180px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+@media (max-width: 560px) {
+  .wrap {
+    width: calc(100% - 2rem);
+  }
+}
+
+.kick {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.kick::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--gold-300);
+  rotate: 45deg;
+  flex: none;
+}
+
+.kick span {
+  color: var(--cream-faint);
+  letter-spacing: 0.18em;
+  font-weight: 500;
+}
+
+.h2 {
+  font-size: clamp(2.4rem, 6.2vw, 5.2rem);
+  padding-top: 0.12em;
+  /* Vietnamese hangs tone marks above and below the letters, so the tight 0.95 of the other
+     headings makes lines touch */
+  line-height: 1.12;
+}
+
+/* English translation set under a big Vietnamese heading */
+.enline {
+  margin-top: 1.1rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--cream-dim);
+  text-wrap: balance;
+}
+
+.h2 em {
+  font-style: normal;
+  color: var(--gold-300);
+}
+
+.dim {
+  color: var(--cream-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

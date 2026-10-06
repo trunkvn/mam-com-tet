@@ -1,0 +1,75 @@
+.band {
+  background: var(--red-950);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.fig {
+  margin: 0;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem clamp(2rem, 6vw, 6rem);
+}
+
+.text blockquote {
+  margin: 0;
+}
+
+.vi {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--gold-300);
+  padding-top: 0.1em;
+}
+
+.say {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: var(--cream-faint);
+}
+
+.en {
+  margin-top: 0.3rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.cap {
+  margin-top: 1.2rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold-300);
+}
+
+.ours {
+  margin-top: 1.4rem;
+  max-width: 28rem;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--cream-dim);
+}
+
+@media (max-width: 899px) {
+  .fig {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ours {
+    margin-inline: auto;
+  }
+}

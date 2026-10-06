@@ -1,0 +1,32 @@
+.toggle {
+  --fg: var(--toggle-fg, var(--gold-300));
+  --bg: var(--toggle-bg, var(--red-900));
+  display: inline-flex;
+  border: 1.5px solid var(--fg);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.toggle button {
+  font: inherit;
+  padding: 0.4rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fg);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.toggle button:hover:not([aria-pressed="true"]) {
+  background: color-mix(in srgb, var(--fg) 14%, transparent);
+}
+
+.toggle button[aria-pressed="true"] {
+  background: var(--fg);
+  color: var(--bg);
+}

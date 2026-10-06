@@ -1,0 +1,36 @@
+/* sits behind the tray, concentric with it, and spreads out under the text */
+.sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: auto;
+  translate: -50% -50%;
+  color: var(--gold-300);
+  opacity: 0.11;
+  pointer-events: none;
+  /* fade towards the edges so it never has a hard outline */
+  mask-image: radial-gradient(circle, #000 52%, transparent 70%);
+}
+
+.turn {
+  animation: turn 420s linear infinite;
+}
+
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (max-width: 899px) {
+  .sun {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turn {
+    animation: none;
+  }
+}

@@ -1,0 +1,113 @@
+.guest {
+  background: var(--red-950);
+  padding-block: clamp(5rem, 10vw, 8.5rem);
+  overflow: hidden;
+}
+
+.intro {
+  margin-top: 1.2rem;
+  max-width: 36rem;
+}
+
+.lead {
+  position: relative;
+}
+
+/* Hangs from the right edge, level with the intro, and runs down into the 14rem gap above the
+   envelopes. It sits behind them (earlier in the DOM) and never takes clicks. */
+.branch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(44%, 27rem);
+  height: auto;
+  color: var(--gold-300);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* the dotted ring turns very slowly */
+.halo {
+  transform-origin: 300px 190px;
+  animation: spin 180s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* the whole branch swings a little around the corner it hangs from */
+.sway {
+  transform-origin: 466px -6px;
+  animation: sway 9s ease-in-out infinite alternate;
+}
+
+@keyframes sway {
+  from {
+    rotate: -1.4deg;
+  }
+  to {
+    rotate: 1.8deg;
+  }
+}
+
+/* each flower opens and closes a touch, out of step with its neighbours (delay is set inline) */
+.bloom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+  from {
+    scale: 1;
+    rotate: -4deg;
+  }
+  to {
+    scale: 1.1;
+    rotate: 5deg;
+  }
+}
+
+/* a petal fades in at the flower, drifts down and sideways while it turns, and fades out.
+   Delay, duration and --drift are set inline so the five petals never move in step. */
+.petal {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: fall 10s ease-in infinite;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: var(--drift) 150px;
+    rotate: 220deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo,
+  .sway,
+  .bloom,
+  .petal {
+    animation: none;
+  }
+}
+
+/* on narrow screens the intro fills the width, so the branch would sit on top of the text */
+@media (max-width: 899px) {
+  .branch {
+    display: none;
+  }
+}
