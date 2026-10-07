@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import styles from "./Preloader.module.css";
 
 /** The screen stays at least this long (ms since the page began loading): long enough to read the
@@ -10,6 +10,19 @@ const MIN_MS = 3500;
 const MAX_MS = 5000;
 /** How long the fade-out takes; the overlay is removed after it. */
 const LEAVE_MS = 900;
+
+// The eight rays, clockwise from the top. Each is drawn from the inner end outwards, so that when
+// they are drawn one after another they open out like a clock hand sweeping round.
+const RAYS = [
+  "M16 9V3",
+  "M21 11l4.2-4.2",
+  "M23 16h6",
+  "M21 21l4.2 4.2",
+  "M16 23v6",
+  "M11 21l-4.2 4.2",
+  "M9 16H3",
+  "M11 11L6.8 6.8",
+];
 
 /**
  * Full-screen splash. It is in the server HTML, so it shows from the first paint. Once fonts and
@@ -74,11 +87,28 @@ export default function Preloader() {
           strokeLinecap="round"
           aria-hidden="true"
         >
-          <g className={styles.draw}>
-            <circle cx="16" cy="16" r="13" pathLength="1" />
-            <circle cx="16" cy="16" r="5" pathLength="1" />
-            <path pathLength="1" d="M16 3v6M16 23v6M3 16h6M23 16h6M6.8 6.8l4.2 4.2M21 21l4.2 4.2M6.8 25.2L11 21M21 11l4.2-4.2" />
-          </g>
+          {/* the ring is drawn first, starting at the top */}
+          <circle
+            className={styles.draw}
+            cx="16"
+            cy="16"
+            r="13"
+            pathLength="1"
+            transform="rotate(-90 16 16)"
+            style={{ "--d": "0s", "--t": "1.2s" } as CSSProperties}
+          />
+          {/* then the rays, one after another */}
+          {RAYS.map((d, i) => (
+            <path
+              key={d}
+              className={styles.draw}
+              pathLength="1"
+              d={d}
+              style={{ "--d": `${(0.5 + i * 0.1).toFixed(1)}s`, "--t": "0.5s" } as CSSProperties}
+            />
+          ))}
+          {/* and the middle pops in last, with a little overshoot */}
+          <circle className={styles.core} cx="16" cy="16" r="5" />
         </svg>
         <p className={styles.title}>Mâm Cơm Tết</p>
         <p className={styles.sub}>
@@ -90,11 +120,8 @@ export default function Preloader() {
           <i />
         </div>
         <p className={styles.note}>
-          <span lang="vi">Lưu ý: thông tin có thể chưa chính xác hoặc chưa đầy đủ.</span>
-          <span lang="en">
-            Please note: this page may contain inaccuracies. Customs differ from family to family
-            and region to region, so check anything that matters and trust your own home.
-          </span>
+          <span lang="vi">Lưu ý: thông tin có thể chưa chính xác.</span>
+          <span lang="en">Please note: this page may contain inaccuracies. Customs differ from home to home.</span>
         </p>
       </div>
     </div>

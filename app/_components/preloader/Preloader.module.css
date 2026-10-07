@@ -5,14 +5,25 @@
   display: grid;
   place-items: center;
   background: radial-gradient(120% 90% at 50% 40%, var(--red-800), var(--red-950) 70%);
-  transition: opacity 0.8s ease;
   /* Failsafe: if the script never runs, the splash still goes away on its own. */
   animation: failsafe 0.01s linear 7s forwards;
 }
 
+/* On the way out the screen holds for a third of the time, then fades. */
 .pre[data-phase="leaving"] {
-  opacity: 0;
+  animation: out 0.8s var(--ease) forwards;
   pointer-events: none;
+}
+
+@keyframes out {
+  0%,
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes failsafe {
@@ -23,20 +34,22 @@
   }
 }
 
-/* the content fades a little ahead of the background */
+/* on the way out the content swells a little while the screen fades behind it */
 .content {
   position: relative;
   z-index: 1;
   text-align: center;
   color: var(--gold-300);
-  transition:
-    opacity 0.45s ease,
-    scale 0.8s ease;
 }
 
 .pre[data-phase="leaving"] .content {
-  opacity: 0;
-  scale: 1.08;
+  animation: content-out 0.8s var(--ease) forwards;
+}
+
+@keyframes content-out {
+  100% {
+    scale: 1.06;
+  }
 }
 
 .sun {
@@ -44,28 +57,40 @@
   height: auto;
   display: block;
   margin: 0 auto 1.4rem;
-  /* once drawn, the sun turns */
+  /* it turns slowly the whole time, as it always has */
   animation: turn 16s linear infinite;
 }
 
-/* each stroke draws itself in, one after another */
-.draw > * {
+/* Each piece draws itself in. Every piece sets its own start (--d) and length (--t), so the ring
+   and the eight rays overlap instead of going one after another. */
+.draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw 1s cubic-bezier(0.45, 0, 0.2, 1) forwards;
-}
-
-.draw > :nth-child(2) {
-  animation-delay: 0.25s;
-}
-
-.draw > :nth-child(3) {
-  animation-delay: 0.5s;
+  animation: draw var(--t, 0.8s) cubic-bezier(0.45, 0.05, 0.25, 1) var(--d, 0s) forwards;
 }
 
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+/* the middle pops in last, a little too big at first, then settles */
+.core {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: pop 0.9s cubic-bezier(0.34, 1.4, 0.5, 1) 1.2s forwards;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -85,7 +110,7 @@
   line-height: 1.1;
   color: var(--cream);
   opacity: 0;
-  animation: fadeUp 0.7s var(--ease) 0.5s forwards;
+  animation: fadeUp 0.7s var(--ease) 0.9s forwards;
 }
 
 .sub {
@@ -96,7 +121,7 @@
   text-transform: uppercase;
   color: var(--cream-faint);
   opacity: 0;
-  animation: fadeUp 0.7s var(--ease) 0.7s forwards;
+  animation: fadeUp 0.7s var(--ease) 1.1s forwards;
 }
 
 @keyframes fadeUp {
@@ -117,21 +142,24 @@
   background: rgba(240, 190, 107, 0.2);
   border-radius: 2px;
   overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 1.2s forwards;
 }
 
 .bar i {
   display: block;
   height: 100%;
-  width: 0;
+  width: 100%;
   background: var(--gold-300);
+  transform-origin: 0 50%;
   /* creeps towards the end while loading, then runs the rest of the way as the screen fades */
-  animation: fill 2.6s cubic-bezier(0.1, 0.6, 0.3, 1) forwards;
+  animation: fill 3.6s cubic-bezier(0.3, 0.1, 0.2, 1) 0.2s both;
 }
 
 .pre[data-phase="leaving"] .bar i {
-  width: 100%;
+  transform: scaleX(1);
   animation: none;
-  transition: width 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .note {
@@ -142,7 +170,7 @@
   line-height: 1.6;
   color: var(--cream-dim);
   opacity: 0;
-  animation: fadeUp 0.7s var(--ease) 0.9s forwards;
+  animation: fadeUp 0.7s var(--ease) 1.1s forwards;
 }
 
 .note span {
@@ -157,8 +185,11 @@
 }
 
 @keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
   to {
-    width: 90%;
+    transform: scaleX(0.92);
   }
 }
 
@@ -167,21 +198,32 @@
     animation: none;
   }
 
-  .draw > *,
+  .draw,
+  .core,
   .title,
   .sub,
-  .note {
+  .note,
+  .bar {
     animation: none;
     stroke-dashoffset: 0;
     opacity: 1;
   }
 
-  /* the fade is quick, and the content does not drift */
-  .pre {
-    transition-duration: 0.3s;
+  .core {
+    transform: none;
+  }
+
+  .bar i {
+    animation: none;
+    transform: scaleX(0.6);
+  }
+
+  /* the fade is quick, and the content does not swell */
+  .pre[data-phase="leaving"] {
+    animation-duration: 0.3s;
   }
 
   .pre[data-phase="leaving"] .content {
-    scale: 1;
+    animation: none;
   }
 }
