@@ -26,6 +26,7 @@ const DESCRIPTION =
   "An illustrated guide to the Tết feast tray: eight dishes set one at a time, how the tray changes from the 23rd to the 7th, the five fruits, and what to know if you are invited.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mam-com-tet.daiduong020802.workers.dev"),
   title: { default: TITLE, template: "%s · Mâm Cơm Tết" },
   description: DESCRIPTION,
   applicationName: "Mâm Cơm Tết",
