@@ -5,6 +5,7 @@ import GuestSection from "./_components/guest/GuestSection";
 import Hero from "./_components/hero/Hero";
 import TetPrimer from "./_components/primer/TetPrimer";
 import Proverb from "./_components/proverb/Proverb";
+import RecipesSection from "./_components/recipes/RecipesSection";
 import Setting from "./_components/setting/Setting";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Setting />
       <DaysSection />
       <FruitsSection />
+      <RecipesSection />
       <GuestSection />
       <Proverb />
       <Closer />

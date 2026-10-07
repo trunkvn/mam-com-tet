@@ -10,6 +10,7 @@ const SECTIONS = [
   { id: "tray", vi: "Dọn mâm", en: "Setting the tray" },
   { id: "days", vi: "Mâm theo ngày", en: "Day by day" },
   { id: "fruits", vi: "Mâm ngũ quả", en: "The five fruits" },
+  { id: "cook", vi: "Thử làm tại nhà", en: "Try it at home" },
   { id: "invited", vi: "Nếu bạn được mời", en: "If you are invited" },
   { id: "wishes", vi: "Lời chúc", en: "Wishes" },
 ];

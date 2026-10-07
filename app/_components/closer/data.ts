@@ -49,6 +49,16 @@ export const SOURCES: SourceGroup[] = [
     ],
   },
   {
+    topic: "Try it at home",
+    items: [
+      { title: "Grantourismo: Vietnamese Deep Fried Spring Rolls (Nem Rán)", url: "https://grantourismotravels.com/vietnamese-deep-fried-spring-rolls-recipe-nem-ran-recipe/" },
+      { title: "Happy Baking Days: Nem Ran, Vietnamese Fried Spring Rolls", url: "https://happybakingdays.com/nem-ran-vietnamese-fried-spring-rolls-recipe/" },
+      { title: "Trang's Kitchen Table: Vietnamese Braised Pork Belly and Eggs (Thịt kho trứng)", url: "https://www.trangskitchentable.com/vietnamese-braised-pork-belly-and-eggs-thit-kho-trung/" },
+      { title: "Vicky Pham: Vietnamese Poached Chicken (Gà Luộc)", url: "https://vickypham.com/blog/vietnamese-boiled-yellow-chicken/" },
+      { title: "Helen's Recipes: Boiled Chicken (Gà Luộc)", url: "https://helenrecipes.com/recipe-boiled-chicken-ga-luoc/" },
+    ],
+  },
+  {
     topic: "If you are invited, and the proverb",
     items: [
       { title: "Vietcetera: Lunar New Year celebration 101", url: "https://vietcetera.com/en/vietnam-survival-guide-lunar-new-year-celebration-101" },
