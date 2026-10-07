@@ -4,6 +4,21 @@
   overflow: hidden;
 }
 
+/* The heading and the picture beside it. The picture is kept narrow, and shown only where the
+   heading still fits on its two lines beside it; below 1100px the heading is alone. */
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  gap: 2rem 3rem;
+  align-items: center;
+}
+
+@media (max-width: 1099px) {
+  .head {
+    grid-template-columns: 1fr;
+  }
+}
+
 .intro {
   margin-top: 1.2rem;
   max-width: 38rem;

@@ -31,7 +31,10 @@
   padding-block: clamp(5rem, 10vw, 8rem) 2rem;
 }
 
-@media (max-width: 899px) {
+/* The heading column keeps its 46rem and the incense gets what is left, so on a narrowing screen it
+   shrank to nothing. Below 1125px what is left is under 14rem, so the incense steps aside and the
+   heading has the row to itself. */
+@media (max-width: 1124px) {
   .headRow {
     grid-template-columns: 1fr;
   }
