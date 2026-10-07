@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hà Nội · 36 phố phường — giao diện mock</title>
+  <meta name="description" content="Giao diện mock cho trang Hà Nội 36 phố phường." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- a reminder that this is a mock, not the real page -->
+  <p class="mockbadge">MOCK · nội dung, số liệu và vị trí trên bản đồ chỉ là minh họa</p>
+
+  <!-- the ruler: eight ticks, one per chapter, along the top -->
+  <header class="bar">
+    <a class="brand" href="#s1" aria-label="Về đầu trang"><b>36</b><span>Phố<br />Phường</span></a>
+    <nav class="ruler" aria-label="Các chương" id="ruler">
+      <a href="#s1"><i>01</i><em>Mở đầu</em></a>
+      <a href="#s2"><i>02</i><em>Vì sao “hàng”</em></a>
+      <a href="#s3"><i>03</i><em>Bản đồ</em></a>
+      <a href="#s4"><i>04</i><em>Nhà ống</em></a>
+      <a href="#s5"><i>05</i><em>Âm thanh</em></a>
+      <a href="#s6"><i>06</i><em>Dấu tích</em></a>
+      <a href="#s7"><i>07</i><em>Đi bộ</em></a>
+      <a href="#s8"><i>08</i><em>Lời kết</em></a>
+    </nav>
+    <button class="snd" type="button" aria-pressed="false" id="snd">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path class="cone" d="M2 6v4h2.6L8 13V3L4.6 6z" /><path d="M10.3 5.9a3 3 0 0 1 0 4.2" /><path d="M12.2 4a5.6 5.6 0 0 1 0 8" /></svg>
+      <span>Âm thanh</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ───────────── 01 · Mở đầu ───────────── -->
+    <section class="hero" id="s1" aria-labelledby="t1">
+      <div class="hero-top wrap">
+        <span>Hà Nội · Phố cổ</span>
+        <span>Ca dao</span>
+      </div>
+
+      <div class="hero-body wrap">
+        <p class="kick">Mở đầu <span>PROLOGUE</span></p>
+        <h1 class="cond hero-title" id="t1">
+          <span>Rủ nhau chơi</span>
+          <span>khắp Long Thành</span>
+          <span class="g">Ba mươi sáu phố</span>
+          <span class="g">rành rành chẳng sai</span>
+        </h1>
+        <div class="hero-aside">
+          <p class="hero-sub">
+            Hà Nội, 36 phố phường: một tấm bản đồ vẽ bằng nghề, bằng tên phố và bằng tiếng rao.
+          </p>
+          <a class="cue" href="#s2"><span>Cuộn để vào phố</span><i aria-hidden="true">↓</i></a>
+        </div>
+      </div>
+
+      <!-- the street front, drawn by app.js -->
+      <svg class="skyline" id="skyline" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+    </section>
+
+    <!-- ───────────── 02 · Vì sao lại là "hàng" ───────────── -->
+    <section class="why" id="s2" aria-labelledby="t2">
+      <div class="wrap why-grid">
+        <div class="why-word" aria-hidden="true"><span class="cond">Hàng</span></div>
+
+        <div class="why-body">
+          <header class="chead">
+            <span class="num">02</span>
+            <div>
+              <p class="kick">Vì sao lại là “hàng” <span>WHY “HÀNG”</span></p>
+              <h2 class="cond" id="t2">Vì sao lại là <em>“hàng”</em>?</h2>
+            </div>
+          </header>
+
+          <ol class="why-list">
+            <li>
+              <b>01</b>
+              <h3>Nghề nào, phố nấy.</h3>
+              <p>Thợ cùng nghề tụ về một nơi, cùng làng, cùng thờ một vị tổ nghề. Họ làm ở đâu thì bán ở đó, nên cả con phố mang tên thứ hàng ấy.</p>
+            </li>
+            <li>
+              <b>02</b>
+              <h3>“Hàng” là thứ bán, cũng là nơi bán.</h3>
+              <p>Hàng Bạc bán bạc, Hàng Đào bán lụa nhuộm điều, Hàng Mã bán đồ mã. Đọc tên phố là biết ở đó có gì.</p>
+            </li>
+            <li>
+              <b>03</b>
+              <h3>Ba mươi sáu: nhiều và trọn vẹn.</h3>
+              <p>Con số gợi một thành phố có thật nhiều phố, nhiều nghề hơn là một phép đếm. Mỗi nguồn kể danh sách một khác.</p>
+            </li>
+          </ol>
+
+          <!-- name = "hàng" + the thing sold -->
+          <div class="equation" aria-label="Hàng cộng với mặt hàng bằng tên phố">
+            <div class="plate"><small>nơi bán</small><b class="cond">Hàng</b></div>
+            <i>+</i>
+            <div class="plate alt"><small>mặt hàng</small><b class="cond">Bạc</b></div>
+            <i>=</i>
+            <div class="plate gold"><small>tên phố</small><b class="cond">Hàng Bạc</b></div>
+          </div>
+          <ul class="mini-eq" aria-label="Thêm ví dụ">
+            <li><span>Hàng</span> + <b>Đào</b> = Hàng Đào</li>
+            <li><span>Hàng</span> + <b>Mã</b> = Hàng Mã</li>
+            <li><span>Hàng</span> + <b>Quạt</b> = Hàng Quạt</li>
+            <li><span>Hàng</span> + <b>Chiếu</b> = Hàng Chiếu</li>
+            <li><span>Hàng</span> + <b>Buồm</b> = Hàng Buồm</li>
+            <li><span>Hàng</span> + <b>Trống</b> = Hàng Trống</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── 03 · Bản đồ phố cổ ───────────── -->
+    <section class="map" id="s3" aria-labelledby="t3">
+      <div class="wrap">
+        <header class="chead">
+          <span class="num">03</span>
+          <div>
+            <p class="kick">Bản đồ phố cổ <span>THE MAP</span></p>
+            <h2 class="cond" id="t3">Bản đồ <em>phố cổ</em></h2>
+          </div>
+        </header>
+        <p class="lede">Chạm vào một con phố để nghe nó kể: bán gì, ai bán, và bây giờ còn gì. Lọc theo nghề để thấy cả phố cổ đổi màu.</p>
+      </div>
+
+      <div class="mapwrap">
+        <aside class="filters" aria-label="Lọc phố">
+          <label class="search">
+            <span>Tìm phố</span>
+            <input id="q" type="search" placeholder="Hàng Bạc, Hàng Mã…" autocomplete="off" />
+          </label>
+          <p class="flabel">Theo nghề</p>
+          <div class="chips" id="chips"></div>
+          <p class="flabel">Chú giải</p>
+          <ul class="legend" id="legend"></ul>
+        </aside>
+
+        <div class="canvas">
+          <svg id="mapsvg" viewBox="150 70 850 610" role="img" aria-label="Sơ đồ phố cổ Hà Nội (minh họa, không đúng tỉ lệ)">
+            <defs>
+              <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+                <line x1="0" y1="0" x2="0" y2="9" stroke="#f0be6b" stroke-opacity=".24" stroke-width="1" />
+              </pattern>
+              <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#f0be6b" fill-opacity=".16" />
+              </pattern>
+              <!-- a fixed region, so a perfectly straight street (zero width) is not clipped away -->
+              <filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="1000" height="700">
+                <feGaussianBlur stdDeviation="3.2" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+
+            <rect width="1000" height="680" fill="#340509" />
+            <rect width="1000" height="680" fill="url(#dots)" />
+
+            <!-- the river, with the bridge over it -->
+            <path d="M936 0C958 120 918 230 946 340S926 560 952 680H1000V0Z" fill="url(#hatch)" stroke="#f0be6b" stroke-opacity=".4" />
+            <text class="mlabel soft" x="975" y="360" transform="rotate(90 975 360)" text-anchor="middle">SÔNG HỒNG</text>
+            <g class="bridge" stroke="#f0be6b" stroke-opacity=".55" fill="none" stroke-width="1.4">
+              <path d="M772 104L1000 178" /><path d="M768 116L1000 190" />
+              <path d="M800 100v22M840 113v22M880 126v22M920 139v22" />
+            </g>
+            <text class="mlabel soft" x="846" y="98" transform="rotate(18 846 98)" text-anchor="middle">CẦU LONG BIÊN</text>
+
+            <!-- the old citadel, a strip on the west -->
+            <path d="M160 88H260V520H160Z" fill="none" stroke="#f0be6b" stroke-opacity=".38" stroke-dasharray="3 7" />
+            <text class="mlabel soft" transform="translate(214 304) rotate(-90)" text-anchor="middle">HOÀNG THÀNH THĂNG LONG</text>
+
+            <!-- the quarter itself -->
+            <path d="M280 108L880 108L904 132V522H324L280 478Z" fill="#f0be6b" fill-opacity=".045" stroke="#f0be6b" stroke-opacity=".3" />
+            <text class="mlabel soft" x="420" y="128" text-anchor="middle">KHU PHỐ CỔ</text>
+
+            <!-- the lake -->
+            <path d="M590 560C600 530 660 520 720 530C790 540 820 580 790 620C760 655 660 660 610 625C590 612 586 585 590 560Z" fill="url(#hatch)" stroke="#f0be6b" stroke-opacity=".5" />
+            <text class="mlabel soft" x="700" y="650" text-anchor="middle">HỒ HOÀN KIẾM</text>
+            <g stroke="#f0be6b" fill="none" stroke-width="1.3"><path d="M702 598v-18M696 580h12M699 574h6" /></g>
+
+            <g id="streets"></g>
+            <g id="landmarks"></g>
+
+            <!-- compass -->
+            <g transform="translate(206 610)" stroke="#f0be6b" fill="none" stroke-opacity=".6">
+              <circle r="30" stroke-dasharray="2 5" /><path d="M0 -38V38M-38 0H38" stroke-width=".8" />
+              <path d="M0 -30L6 0L0 30L-6 0Z" fill="#f0be6b" fill-opacity=".25" />
+              <text class="mlabel" y="-44" text-anchor="middle" fill="#f0be6b" stroke="none">B</text>
+            </g>
+          </svg>
+
+          <div class="zoom" role="group" aria-label="Phóng to thu nhỏ">
+            <button type="button" id="zin" aria-label="Phóng to">+</button>
+            <button type="button" id="zout" aria-label="Thu nhỏ">−</button>
+            <button type="button" id="zreset" aria-label="Đặt lại">⟲</button>
+          </div>
+          <p class="mapnote">Sơ đồ minh họa · không đúng tỉ lệ · vị trí cần đối chiếu bản đồ thật</p>
+        </div>
+
+        <aside class="drawer" id="drawer" aria-live="polite">
+          <p class="dtag" id="dTag">Chọn một phố</p>
+          <h3 class="cond" id="dName">Hàng …</h3>
+          <p class="dtrade" id="dTrade">Chạm vào một đường trên bản đồ, hoặc một tấm biển bên dưới.</p>
+          <svg class="dfacade" id="dFacade" viewBox="0 0 320 170" aria-hidden="true"></svg>
+          <dl class="dfacts">
+            <div><dt>Xưa</dt><dd id="dOld">—</dd></div>
+            <div><dt>Nay</dt><dd id="dNow">—</dd></div>
+          </dl>
+          <div class="dbtns">
+            <a class="btn" href="#s5">♪ Nghe tiếng phố</a>
+            <a class="btn ghost" href="#s7">+ Vào vòng đi bộ</a>
+          </div>
+        </aside>
+      </div>
+
+      <!-- thirty-six name plates -->
+      <div class="plates-wrap wrap">
+        <p class="flabel">Ba mươi sáu tấm biển</p>
+        <div class="plates" id="plates" role="list"></div>
+      </div>
+    </section>
+
+    <!-- ───────────── 04 · Mặt cắt nhà ống ───────────── -->
+    <section class="house" id="s4" aria-labelledby="t4">
+      <div class="wrap">
+        <header class="chead">
+          <span class="num">04</span>
+          <div>
+            <p class="kick">Mặt cắt nhà ống <span>THE TUBE HOUSE</span></p>
+            <h2 class="cond" id="t4">Mặt cắt <em>nhà ống</em></h2>
+          </div>
+        </header>
+        <p class="lede">Mặt tiền chỉ vài mét, nhưng nhà có thể sâu hàng chục mét: cửa hàng ở trước, sân trời ở giữa, bếp ở sau. Kéo thanh trượt để đi từ phố vào tận sân sau.</p>
+      </div>
+
+      <div class="hscroll" id="hscroll" tabindex="0" aria-label="Mặt cắt dọc một ngôi nhà ống, kéo ngang để xem">
+        <svg id="housesvg" viewBox="0 0 2400 560" aria-hidden="true"></svg>
+      </div>
+
+      <div class="wrap hctl">
+        <div class="slider">
+          <label for="depth">Đi từ phố vào nhà</label>
+          <input id="depth" type="range" min="0" max="100" value="8" />
+          <output id="depthOut" for="depth">0 m</output>
+        </div>
+        <div class="hpanel" id="hpanel" aria-live="polite">
+          <b class="hnum" id="hNum">1</b>
+          <div><h3 class="cond" id="hTitle">Mặt tiền</h3><p id="hText"></p></div>
+        </div>
+        <p class="hnote">Số đo và bố cục minh họa. Nhà thật mỗi nhà một khác.</p>
+      </div>
+    </section>
+
+    <!-- ───────────── 05 · Âm thanh phố cổ ───────────── -->
+    <section class="sound" id="s5" aria-labelledby="t5">
+      <div class="wrap">
+        <header class="chead">
+          <span class="num">05</span>
+          <div>
+            <p class="kick">Âm thanh phố cổ <span>THE SOUND OF THE STREETS</span></p>
+            <h2 class="cond" id="t5">Âm thanh <em>phố cổ</em></h2>
+          </div>
+        </header>
+        <p class="lede">Phố cổ không chỉ để nhìn. Kéo giờ trong ngày, bật từng lớp âm thanh và nghe một ngày của phố.</p>
+
+        <div class="mixer">
+          <div class="day">
+            <svg viewBox="0 0 600 120" id="dayArc" aria-hidden="true"></svg>
+            <div class="hour">
+              <label for="hour">Giờ trong ngày</label>
+              <input id="hour" type="range" min="4" max="23" step="0.5" value="6" />
+              <output id="hourOut" for="hour">06:00</output>
+            </div>
+          </div>
+          <div class="channels" id="channels"></div>
+          <div class="mixfoot">
+            <button class="btn" type="button" id="playAll">▶ Nghe cả phố</button>
+            <p>Mỗi lớp âm thanh gắn với một phố trên bản đồ. Âm thanh thật sẽ được thu tại chỗ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── 06 · Dấu tích còn lại ───────────── -->
+    <section class="relics" id="s6" aria-labelledby="t6">
+      <div class="wrap">
+        <header class="chead">
+          <span class="num">06</span>
+          <div>
+            <p class="kick">Dấu tích còn lại <span>WHAT REMAINS</span></p>
+            <h2 class="cond" id="t6">Dấu tích <em>còn lại</em></h2>
+          </div>
+        </header>
+        <p class="lede">Hơn một nghìn năm, phố đổi nhiều thứ. Đây là những gì còn lại: nguyên vẹn, một phần, hoặc chỉ còn trong tên gọi.</p>
+
+        <div class="cards" id="cards"></div>
+      </div>
+    </section>
+
+    <!-- ───────────── 07 · Một vòng đi bộ ───────────── -->
+    <section class="walk" id="s7" aria-labelledby="t7">
+      <div class="wrap">
+        <header class="chead">
+          <span class="num">07</span>
+          <div>
+            <p class="kick">Một vòng đi bộ <span>A WALK</span></p>
+            <h2 class="cond" id="t7">Một vòng <em>đi bộ</em></h2>
+          </div>
+        </header>
+        <ul class="sum" aria-label="Tóm tắt lộ trình">
+          <li><b>≈ 2,5 km</b><span>quãng đường</span></li>
+          <li><b>3 giờ</b><span>đi chậm, có nghỉ</span></li>
+          <li><b>8 điểm</b><span>dừng chân</span></li>
+        </ul>
+
+        <div class="route">
+          <ol class="stops" id="stops"></ol>
+          <aside class="mini" aria-label="Lộ trình trên bản đồ">
+            <svg viewBox="0 0 400 360" id="miniMap" aria-hidden="true"></svg>
+            <p class="minilbl" id="miniLbl"></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── 08 · Lời kết ───────────── -->
+    <section class="end" id="s8" aria-labelledby="t8">
+      <div class="wrap end-body">
+        <p class="kick">Lời kết <span>EPILOGUE</span></p>
+        <h2 class="cond end-title" id="t8">Rành rành<br /><em>chẳng sai.</em></h2>
+        <p class="end-text">
+          Ba mươi sáu không phải con số để đếm cho đủ. Nó chỉ để nhớ rằng phố nào cũng có một nghề, nhà nào cũng có một chiều sâu, và buổi sáng nào cũng có một tiếng rao.
+        </p>
+        <div class="end-btns">
+          <a class="btn" href="#s3">Quay lại bản đồ</a>
+          <a class="btn ghost" href="#s1">Về đầu trang ↑</a>
+        </div>
+      </div>
+      <svg class="skyline end-sky" id="skyline2" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+      <footer class="foot wrap">
+        <span>Hà Nội · 36 phố phường</span>
+        <span>Tư liệu: đang cập nhật</span>
+        <span>Cùng mạch với Mâm Cơm Tết</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tranh Đông Hồ — giao diện mock</title>
+  <meta name="description" content="Giao diện mock cho trang về tranh dân gian Đông Hồ." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <p class="mockbadge">MOCK · nội dung và tình trạng ván khắc chỉ là minh họa</p>
+
+  <a class="brand" href="#d1" aria-label="Về đầu trang">
+    <b>ĐH</b><span>Tranh<br />Đông Hồ</span>
+  </a>
+
+  <!-- the seals: one red stamp per chapter, down the right edge -->
+  <nav class="seals" id="seals" aria-label="Các phần">
+    <a href="#d1"><i>01</i><em>Mở đầu</em></a>
+    <a href="#d2"><i>02</i><em>Giấy điệp</em></a>
+    <a href="#d3"><i>03</i><em>In tranh</em></a>
+    <a href="#d4"><i>04</i><em>Đọc tranh</em></a>
+    <a href="#d5"><i>05</i><em>Màu</em></a>
+    <a href="#d6"><i>06</i><em>Ván khắc</em></a>
+    <a href="#d7"><i>07</i><em>Một ngày</em></a>
+    <a href="#d8"><i>08</i><em>Lời kết</em></a>
+  </nav>
+
+  <main>
+    <!-- ═════════ 01 · Mở đầu: three prints on a red wall ═════════ -->
+    <section class="wall hero" id="d1" aria-labelledby="t1">
+      <p class="hero-tag"><span>Tranh dân gian</span> Đông Hồ · Thuận Thành, Bắc Ninh</p>
+
+      <div class="hero-wall">
+        <figure class="print side l" id="artPig" aria-label="Tranh Lợn âm dương"></figure>
+
+        <article class="print main sheet diep" aria-labelledby="t1">
+          <span class="tape a" aria-hidden="true"></span><span class="tape b" aria-hidden="true"></span>
+          <p class="cap-top"><b>Bên kia sông Đuống</b><span>Hoàng Cầm · 1948</span></p>
+          <h1 class="poem" id="t1">
+            <span class="l1">Quê hương ta lúa nếp thơm nồng</span>
+            <span class="l2 disp"><em class="redblock">Tranh Đông Hồ</em> gà lợn nét tươi trong</span>
+            <span class="l3 disp">Màu dân tộc sáng bừng trên <em>giấy điệp</em></span>
+          </h1>
+          <div class="cap-bottom">
+            <span>Làng Song Hồ · bờ nam sông Đuống</span>
+            <a class="cue" href="#d2"><span>Xem tranh được làm thế nào</span><i aria-hidden="true">↓</i></a>
+          </div>
+        </article>
+
+        <figure class="print side r" id="artRooster" aria-label="Tranh Gà đại cát"></figure>
+      </div>
+    </section>
+
+    <!-- ═════════ 02 · Vì sao là giấy điệp ═════════ -->
+    <section class="diep why" id="d2" aria-labelledby="t2">
+      <div class="wrap why-grid">
+        <div class="sheetwrap">
+          <div class="shimmer diep" id="shimmer" role="img" aria-label="Một tờ giấy điệp: rê chuột để thấy ánh lấp lánh">
+            <span class="tape a" aria-hidden="true"></span><span class="tape b" aria-hidden="true"></span>
+            <span class="stroke s1"></span><span class="stroke s2"></span><span class="stroke s3"></span>
+            <p class="shimmer-hint">Rê chuột lên tờ giấy<br /><small>để thấy ánh điệp</small></p>
+          </div>
+        </div>
+
+        <div class="why-body">
+          <header class="dh">
+            <span class="seal">02</span>
+            <div>
+              <p class="eyebrow">Vì sao là giấy điệp <span>THE PAPER</span></p>
+              <h2 class="disp mis" id="t2">Vì sao là <em>giấy điệp</em>?</h2>
+            </div>
+          </header>
+
+          <ol class="why-list">
+            <li><b>01</b><div><h3>Nền của tranh không phải giấy trắng.</h3><p>Giấy dó được quét nhiều lớp bột vỏ sò điệp trộn hồ. Mặt giấy vì thế lấp lánh nhẹ, và còn nguyên những đường vân của chiếc chổi quét.</p></div></li>
+            <li><b>02</b><div><h3>Màu nằm trên nền ấy và sáng lên nhờ nó.</h3><p>Nền điệp phản chiếu ánh sáng, nên màu tranh trông tươi mà không phải pha, không phải tô đi tô lại.</p></div></li>
+            <li><b>03</b><div><h3>Cả nền lẫn màu đều lấy từ thiên nhiên.</h3><p>Vỏ sò, lá tre, hoa hòe, lá chàm. Không ai mua chúng ở đâu cả: người làng tự thu và tự chế.</p></div></li>
+          </ol>
+
+          <div class="equation" aria-label="Giấy dó cộng bột vỏ điệp cộng hồ bằng giấy điệp">
+            <div class="tile"><small>nền</small><b class="disp">Giấy dó</b></div>
+            <i>+</i>
+            <div class="tile"><small>vỏ sò</small><b class="disp">Bột điệp</b></div>
+            <i>+</i>
+            <div class="tile"><small>gạo, nếp</small><b class="disp">Hồ</b></div>
+            <i>=</i>
+            <div class="tile gold"><small>quét nhiều lớp</small><b class="disp">Giấy điệp</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════ 03 · In một bức tranh (the main interaction) ═════════ -->
+    <section class="wall press" id="d3" aria-labelledby="t3">
+      <div class="wrap">
+        <header class="dh light">
+          <span class="seal">03</span>
+          <div>
+            <p class="eyebrow">In một bức tranh <span>THE PRINTING</span></p>
+            <h2 class="disp mis" id="t3">In một <em>bức tranh</em></h2>
+          </div>
+        </header>
+        <p class="lede">Mỗi màu một ván gỗ. Ván màu in trước, ván nét đen luôn in sau cùng. Bấm lần lượt từng ván để xem tranh hiện ra, rồi thử bật chế độ lệch ván.</p>
+      </div>
+
+      <div class="table wrap">
+        <!-- the blocks, in the order they are printed -->
+        <aside class="tray" aria-label="Các ván in">
+          <p class="tlabel">Các ván khắc</p>
+          <div class="blocks" id="blocks"></div>
+          <button class="reset" type="button" id="reprint">↺ In lại từ đầu</button>
+        </aside>
+
+        <div class="bench">
+          <div class="sheetframe">
+            <svg class="artsvg" id="printSvg" viewBox="0 0 440 520" role="img" aria-label="Tranh Gà đại cát đang được in"></svg>
+            <div class="flyblock" id="fly" aria-hidden="true"></div>
+          </div>
+          <div class="steps" id="steps" aria-hidden="true"></div>
+        </div>
+
+        <aside class="panel" aria-live="polite">
+          <p class="tlabel">Bước <b id="stepNo">0</b> / <span id="stepTot">5</span></p>
+          <h3 class="disp" id="stepTitle">Tờ giấy điệp</h3>
+          <p id="stepText">Tranh bắt đầu từ một tờ giấy điệp trắng, chưa có gì trên đó.</p>
+          <label class="switch">
+            <input type="checkbox" id="mis" />
+            <span class="knob"></span>
+            <span><b>Lệch ván</b><small>Thử in sai vài ly để thấy tay nghề</small></span>
+          </label>
+          <button class="btn" type="button" id="auto">▶ Tự in cả bức</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ═════════ 04 · Đọc "Đám cưới chuột" ═════════ -->
+    <section class="diep read" id="d4" aria-labelledby="t4">
+      <div class="wrap">
+        <header class="dh">
+          <span class="seal">04</span>
+          <div>
+            <p class="eyebrow">Đọc một bức tranh <span>READING A PRINT</span></p>
+            <h2 class="disp mis" id="t4">Đọc <em>Đám cưới chuột</em></h2>
+          </div>
+        </header>
+        <p class="lede">Một đám rước nhỏ mà nói chuyện lớn. Bấm các con số trên tranh, hoặc dùng mũi tên, để đọc từng chi tiết.</p>
+      </div>
+
+      <div class="wrap readbox">
+        <div class="scroll" id="scroll">
+          <svg class="artwide" id="miceSvg" viewBox="0 0 1200 440" role="img" aria-label="Tranh Đám cưới chuột"></svg>
+        </div>
+        <div class="reader">
+          <button class="arrow" type="button" id="prevR" aria-label="Chi tiết trước">‹</button>
+          <div class="rtext" aria-live="polite">
+            <p class="rno"><b id="rNo">1</b> / <span id="rTot">6</span></p>
+            <h3 class="disp" id="rTitle"></h3>
+            <p id="rText"></p>
+          </div>
+          <button class="arrow" type="button" id="nextR" aria-label="Chi tiết sau">›</button>
+        </div>
+        <p class="rnote">Đây là một cách hiểu phổ biến. Tranh dân gian thường có nhiều lớp nghĩa.</p>
+      </div>
+    </section>
+
+    <!-- ═════════ 05 · Màu từ thiên nhiên ═════════ -->
+    <section class="wall colors" id="d5" aria-labelledby="t5">
+      <div class="wrap">
+        <header class="dh light">
+          <span class="seal">05</span>
+          <div>
+            <p class="eyebrow">Màu từ thiên nhiên <span>NATURAL COLOUR</span></p>
+            <h2 class="disp mis" id="t5">Màu từ <em>thiên nhiên</em></h2>
+          </div>
+        </header>
+        <p class="lede">Mỗi màu của tranh đến từ một thứ có thật trong làng. Chọn nguồn của từng màu và xem bức tranh đổi sắc.</p>
+
+        <div class="mixbox">
+          <div class="pigments" id="pigments"></div>
+          <div class="preview">
+            <svg class="artsvg" id="previewSvg" viewBox="0 0 440 520" role="img" aria-label="Tranh Gà đại cát với màu đã chọn"></svg>
+            <p class="pcap" id="pcap"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════ 06 · Kho ván khắc ═════════ -->
+    <section class="diep blocksec" id="d6" aria-labelledby="t6">
+      <div class="wrap">
+        <header class="dh">
+          <span class="seal">06</span>
+          <div>
+            <p class="eyebrow">Ván khắc còn lại <span>WHAT REMAINS</span></p>
+            <h2 class="disp mis" id="t6">Còn lại <em>bao nhiêu</em></h2>
+          </div>
+        </header>
+        <p class="lede">Mỗi bức tranh cần cả một bộ ván khắc. Ván còn thì tranh còn, ván mất thì bức tranh chỉ còn trong trí nhớ.</p>
+
+        <div class="legend2" id="legend2"></div>
+        <div class="vault" id="vault"></div>
+      </div>
+    </section>
+
+    <!-- ═════════ 07 · Một ngày ở làng ═════════ -->
+    <section class="wall day" id="d7" aria-labelledby="t7">
+      <div class="wrap">
+        <header class="dh light">
+          <span class="seal">07</span>
+          <div>
+            <p class="eyebrow">Một ngày ở làng <span>A DAY IN THE VILLAGE</span></p>
+            <h2 class="disp mis" id="t7">Một ngày <em>ở làng</em></h2>
+          </div>
+        </header>
+
+        <div class="dayrow">
+          <ol class="hours" id="hours"></ol>
+          <aside class="dial" aria-label="Đồng hồ nắng">
+            <svg viewBox="0 0 320 320" id="dialSvg" aria-hidden="true"></svg>
+            <p class="dlabel" id="dLabel"></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════ 08 · Lời kết ═════════ -->
+    <section class="wall end" id="d8" aria-labelledby="t8">
+      <div class="wrap end-body">
+        <p class="eyebrow">Lời kết <span>EPILOGUE</span></p>
+        <h2 class="disp mis endtitle" id="t8">
+          <span>Màu dân tộc</span>
+          <span>sáng bừng</span>
+          <span><em>trên giấy điệp.</em></span>
+        </h2>
+        <p class="endtext">Một tờ giấy, vài ván gỗ, năm màu lấy từ vỏ sò, lá tre và hoa. Đủ để một ngôi làng nhỏ bên sông Đuống treo lên cả năm Tết của nhiều nhà.</p>
+        <div class="endbtns">
+          <a class="btn" href="#d3">In thêm một bức</a>
+          <a class="btn ghost" href="#d1">Về đầu trang ↑</a>
+        </div>
+      </div>
+      <div class="endprints" aria-hidden="true">
+        <figure class="print small l" id="artPig2"></figure>
+        <figure class="print small r" id="artRooster2"></figure>
+      </div>
+      <footer class="foot wrap">
+        <span>Tranh dân gian Đông Hồ</span>
+        <span>Tư liệu: đang cập nhật</span>
+        <span>Cùng mạch với Mâm Cơm Tết</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
