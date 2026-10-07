@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Speak from "../speech/Speak";
+import { shortDateYear } from "../tet/format";
+import { useTetYear } from "../tet/TetYear";
 import DayIcon from "./DayIcon";
 import type { Day } from "./data";
 import styles from "./Days.module.css";
@@ -30,6 +32,8 @@ export default function Days({ days }: { days: Day[] }) {
   const [drag, setDrag] = useState<"idle" | "holding" | "settling">("idle");
   const lockUntil = useRef(0);
   const suppressClick = useRef(false);
+  // the dates of the Tết being looked at in the countdown, once the page knows today's date
+  const { days: season } = useTetYear();
 
   /**
    * How far from the row's left edge a card sits when it is "in place". The row's padding and
@@ -179,7 +183,12 @@ export default function Days({ days }: { days: Day[] }) {
                 <span>{d.month}</span>
                 <span>{pad(i + 1)} / {pad(days.length)}</span>
               </p>
-              <div className={styles.n}>{d.n}</div>
+              {/* the real date this year. Space is kept for it so the card does not jump when it arrives */}
+              <p className={styles.solar} lang="en">
+                {season ? shortDateYear(season[d.when]) : "\u00a0"}
+              </p>
+              {/* the last day of the old year is the 29th or the 30th, depending on the year */}
+              <div className={styles.n}>{d.when === "eve" && season ? season.eveDay : d.n}</div>
               <div className={styles.ic}><DayIcon name={d.icon} /></div>
               {d.varies && <p className={styles.tag} lang="en">Date varies</p>}
               <h3 lang="vi">{d.vi}</h3>

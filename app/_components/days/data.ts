@@ -19,6 +19,8 @@ export type Day = {
   varies?: boolean;
   /** Highlighted card: midnight. */
   hot?: boolean;
+  /** Which day of the Tết season this is, so the page can show its date on the Gregorian calendar. */
+  when: "kitchenGods" | "eve" | "tet" | "day3" | "day7";
 };
 
 // Dates are lunar. Where sources disagree the card says so instead of picking one.
@@ -26,6 +28,7 @@ export const DAYS: Day[] = [
   {
     month: "Tháng Chạp",
     n: "23",
+    when: "kitchenGods",
     vi: "Ông Công, Ông Táo",
     say: "ohng kohng, ohng tow",
     en: "Seeing off the Kitchen Gods",
@@ -37,6 +40,7 @@ export const DAYS: Day[] = [
   {
     month: "Tháng Chạp",
     n: "30",
+    when: "eve",
     vi: "Tất niên & Giao thừa",
     say: "tuht nee-en · zow tuh-ah",
     en: "The last night of the year",
@@ -49,6 +53,7 @@ export const DAYS: Day[] = [
   {
     month: "Tháng Giêng",
     n: "1",
+    when: "tet",
     vi: "Mùng một",
     say: "moong moht",
     en: "The first morning",
@@ -60,6 +65,7 @@ export const DAYS: Day[] = [
   {
     month: "Tháng Giêng",
     n: "3",
+    when: "day3",
     vi: "Tiễn ông bà · Hóa vàng",
     say: "tee-en ohng bah · hwah vahng",
     en: "Seeing the ancestors off",
@@ -72,6 +78,7 @@ export const DAYS: Day[] = [
   {
     month: "Tháng Giêng",
     n: "7",
+    when: "day7",
     vi: "Khai hạ · Hạ nêu",
     say: "kye hah · hah nay-oo",
     en: "Lowering the pole",

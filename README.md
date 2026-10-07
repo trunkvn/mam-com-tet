@@ -3,7 +3,7 @@
 # Mâm Cơm Tết
 
 **An illustrated guide to the Vietnamese new-year feast tray.**
-Eight dishes set one at a time, a tray that changes from the 23rd to the 7th, five fruits, and what to know if you are invited.
+When Tết falls and how long to wait, eight dishes set one at a time, a tray that changes from the 23rd to the 7th, five fruits, three dishes to cook at home, and what to know if you are invited.
 
 <br />
 
@@ -30,10 +30,11 @@ It is a single scrolling page. Everything is drawn in a lacquer-red and gold lin
 
 ## Highlights
 
+- **When is Tết?** A small tear-off calendar gives the day Tết begins on the Gregorian calendar, the days left, and the name of the year (Đinh Mùi, the Goat). Step to any year from 1976 to 2100.
 - **A tray that sets itself.** A sticky tray on the left fills dish by dish while you scroll the steps on the right. The ring of dishes turns like a lazy Susan, so the dish being set always drops in at the top.
 - **Dishes that turn into photos.** Hover, focus or tap a plate and its line drawing gives way to a real photo, right on the plate.
 - **Three regional trays.** North, centre and south each lay eight dishes in their own way; one toggle swaps the whole tray.
-- **A day-by-day carousel.** Five cards from the 23rd of the twelfth lunar month to the 7th. Drag it, swipe it, use the arrows or the arrow keys, or click a card to bring it forward.
+- **A day-by-day carousel.** Five cards from the 23rd of the twelfth lunar month to the 7th, each with its real date for the year being shown. Drag it, swipe it, use the arrows or the arrow keys, or click a card to bring it forward.
 - **The five-fruit tray, by region.** The north chooses by colour, the south by what the names sound like, and the centre often just offers what it has.
 - **Three dishes to cook at home.** Nem rán, gà luộc and thịt kho, each with what to buy abroad and what to use if you cannot find it. Tick ingredients off as a shopping list.
 - **Hear it said.** A small speaker button sits beside the pronunciation of every dish, fruit, day and wish, and plays the Vietnamese with its tones, which spelling it out in English letters cannot do.
@@ -42,6 +43,12 @@ It is a single scrolling page. Everything is drawn in a lacquer-red and gold lin
 - **Honest about what it knows.** Dates are lunar and families differ, so cards say *“Date varies”* where sources disagree, italic lines are marked as the page's own telling, and every source is listed at the bottom.
 
 ## Screenshots
+
+### When is Tết?
+
+A tear-off calendar for the next Tết, the days around it, and a year to step through.
+
+<img src="docs/screenshots/countdown.jpg" alt="A small tear-off calendar page showing Saturday 6, with 122 days to go, the year of the Goat, and a row of dates from the 23rd of the twelfth month to the 7th day" />
 
 ### The tray, set dish by dish
 
@@ -57,9 +64,9 @@ Each region sets eight dishes in its own way.
 
 ### Day by day
 
-The tray changes from the 23rd to the 7th. The card for midnight on the 30th is lit by default.
+The tray changes from the 23rd to the 7th, and each card shows its date on the Gregorian calendar. The card for the last night of the year is lit by default, and shows the 29th or the 30th depending on the year.
 
-<img src="docs/screenshots/days.jpg" alt="The Mâm đổi, ngày qua ngày section with a row of day cards and a progress bar underneath" />
+<img src="docs/screenshots/days.jpg" alt="The Mâm đổi, ngày qua ngày section with a row of day cards, each with its date on the Gregorian calendar, and a progress bar underneath" />
 
 ### The five fruits
 
@@ -100,7 +107,7 @@ There are no runtime dependencies beyond Next.js and React. Every carousel, obse
 
 ## Getting started
 
-You need Node.js 20.9 or newer and [pnpm](https://pnpm.io).
+You need Node.js 20.9 or newer and [pnpm](https://pnpm.io). (`pnpm audio` needs Node.js 22.18 or newer, because it reads the TypeScript data files directly.)
 
 ```bash
 pnpm install
@@ -136,6 +143,7 @@ app/
     ├── fruits/              # the five-fruit tray and its orbit
     ├── recipes/             # "Try it at home": three dishes to cook
     ├── speech/              # the speaker button and the file names it plays
+    ├── tet/                 # the lunar calendar (lunar.ts), the shared year, the countdown
     ├── guest/               # the six envelopes
     ├── proverb/             # proverb figures, the thread to the greeting
     ├── closer/              # the greeting, wishes and sources
@@ -158,12 +166,15 @@ The recordings are made by the macOS Vietnamese voice *Linh*, with `pnpm audio` 
 
 - The main interactions work from the keyboard: the carousel takes ← and →, plates take focus and show their photo, envelopes are real buttons.
 - Motion respects `prefers-reduced-motion`: the ring stops turning, blossoms and sparks stand still, and the carousel and page scrolling jump instead of gliding.
+- The countdown announces its number politely when it changes, and its year stepper is two labelled buttons.
 - Vietnamese and English text carry `lang` attributes so screen readers pick the right voice.
 - Decorative art is hidden from assistive technology; photos and controls are labelled, and each speaker button names the word it plays.
 
 ## About the content
 
 The recipes are adapted, in our own words, from the cooks listed under **Try it at home** at the bottom of the page. Where they differ we picked one version, and none of them has been cooked in our own kitchen.
+
+The Tết dates come from our own working of the Vietnamese lunar calendar (`app/_components/tet/lunar.ts`), done for UTC+7, and not from the browser's built-in Chinese calendar: the two can disagree, as they do for 2027. The dates shown are the ones in Vietnam, so where you are, giao thừa can fall on the day before. The countdown counts from your own calendar date, and shows next year's Tết once the 7th day of this one has passed. The results were checked against published Vietnamese dates for 2024 to 2032 and against the famous 1985 case, when Tết fell on 21 January in Vietnam and 20 February in China. Other years have not been checked by hand.
 
 This page is a sketch, not a rulebook. Customs differ by family and region, the English-language sources are mostly travel guides, and the italic lines are our own telling rather than tradition. The text was written from mostly Vietnamese press; the full list is under **Where this comes from** at the bottom of the page. If something does not match your home, trust your home.
 

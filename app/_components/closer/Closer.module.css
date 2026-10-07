@@ -302,6 +302,12 @@
   text-decoration: none;
 }
 
+/* the name in the credit */
+.foot strong {
+  font-weight: 600;
+  color: var(--gold-200);
+}
+
 @media (max-width: 899px) {
   .wishes {
     grid-template-columns: repeat(2, minmax(0, 1fr));

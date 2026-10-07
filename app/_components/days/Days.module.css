@@ -130,6 +130,16 @@
   justify-content: space-between;
 }
 
+.solar {
+  margin-top: 0.7rem;
+  min-height: 1.2em;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold-200);
+}
+
 .n {
   transition: color 0.3s;
   white-space: nowrap;
