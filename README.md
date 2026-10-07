@@ -36,6 +36,7 @@ It is a single scrolling page. Everything is drawn in a lacquer-red and gold lin
 - **A day-by-day carousel.** Five cards from the 23rd of the twelfth lunar month to the 7th. Drag it, swipe it, use the arrows or the arrow keys, or click a card to bring it forward.
 - **The five-fruit tray, by region.** The north chooses by colour, the south by what the names sound like, and the centre often just offers what it has.
 - **Three dishes to cook at home.** Nem rán, gà luộc and thịt kho, each with what to buy abroad and what to use if you cannot find it. Tick ingredients off as a shopping list.
+- **Hear it said.** A small speaker button sits beside the pronunciation of every dish, fruit, day and wish, and plays the Vietnamese with its tones, which spelling it out in English letters cannot do.
 - **Six envelopes of etiquette.** Tap a red envelope to read what to bring, what to say and how to take a *lì xì*.
 - **A thread from the proverb to the greeting.** A gold thread carries blossoms from *“Lời chào cao hơn mâm cỗ”* down to *“Chúc mừng năm mới”*.
 - **Honest about what it knows.** Dates are lunar and families differ, so cards say *“Date varies”* where sources disagree, italic lines are marked as the page's own telling, and every source is listed at the bottom.
@@ -114,6 +115,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `pnpm build` | Build for production |
 | `pnpm start` | Serve the production build |
 | `pnpm lint` | Run ESLint |
+| `pnpm audio` | Make the pronunciation recordings that are missing (macOS only, see below) |
 
 ## Project structure
 
@@ -133,6 +135,7 @@ app/
     ├── days/                # the day-by-day carousel
     ├── fruits/              # the five-fruit tray and its orbit
     ├── recipes/             # "Try it at home": three dishes to cook
+    ├── speech/              # the speaker button and the file names it plays
     ├── guest/               # the six envelopes
     ├── proverb/             # proverb figures, the thread to the greeting
     ├── closer/              # the greeting, wishes and sources
@@ -141,14 +144,22 @@ app/
     └── ui/                  # shared headings and the region toggle
 ```
 
+`public/audio/vi/` holds the pronunciation recordings, and `scripts/generate-audio.mjs` makes them.
+
 `app/_components/days/steps/` holds `Step1` to `Step8`: the day-by-day carousel rebuilt one idea at a time, from plain cards to drag-to-scroll. They are rendered by `app/_learn`, a private folder that does not create a route. Rename it to `app/learn` to browse them at `/learn/days`.
+
+## Pronunciation audio
+
+Each speaker button plays a short recording from `public/audio/vi/`. If a recording is missing or will not load, it falls back to the browser's own Vietnamese voice, and if the browser has none the button says so instead of reading Vietnamese with the wrong sounds.
+
+The recordings are made by the macOS Vietnamese voice *Linh*, with `pnpm audio` (it only makes what is missing; `pnpm audio --force` makes everything again). They are **machine voices, not a person**, and they have not been checked by a native speaker. To use a real recording, save it as `.m4a` under the same file name in `public/audio/vi/`: the page plays that file with no code change. Check that the licence of the voice you use allows publishing its audio.
 
 ## Accessibility
 
 - The main interactions work from the keyboard: the carousel takes ← and →, plates take focus and show their photo, envelopes are real buttons.
 - Motion respects `prefers-reduced-motion`: the ring stops turning, blossoms and sparks stand still, and the carousel and page scrolling jump instead of gliding.
 - Vietnamese and English text carry `lang` attributes so screen readers pick the right voice.
-- Decorative art is hidden from assistive technology; photos and controls are labelled.
+- Decorative art is hidden from assistive technology; photos and controls are labelled, and each speaker button names the word it plays.
 
 ## About the content
 

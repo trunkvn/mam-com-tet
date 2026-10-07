@@ -1,5 +1,6 @@
 "use client";
 
+import Speak from "../speech/Speak";
 import Rich from "../ui/Rich";
 import { useState, type ReactNode } from "react";
 import type { RegionId } from "../dishes/data";
@@ -48,7 +49,7 @@ export default function Fruits({
               <FruitArt id={f.id} scale={f.scale} />
             </div>
             <h3 lang="vi">{f.vi}</h3>
-            <p className={styles.say} lang="en">say “{f.say}”</p>
+            <p className={styles.say} lang="en">say “{f.say}” <Speak text={f.vi} /></p>
             <em lang="en">{f.en}</em>
             <p className={styles.tag} lang="en"><Rich>{f.tag}</Rich></p>
             <p className={styles.body} lang="en"><Rich>{f.body}</Rich></p>

@@ -1,0 +1,82 @@
+/* A small round speaker button, set at the end of a pronunciation line. Colours come from
+   --speak-fg / --speak-bg (gold on dark by default), so it can sit on the cream section too. */
+
+.speak {
+  --fg: var(--speak-fg, var(--gold-300));
+  --bg: var(--speak-bg, var(--red-900));
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-inline: 0.5rem 0;
+  padding: 0;
+  vertical-align: middle;
+  border: 1px solid color-mix(in srgb, var(--fg) 55%, transparent);
+  border-radius: 50%;
+  background: none;
+  color: var(--fg);
+  font-style: normal;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    opacity 0.2s;
+}
+
+.speak:hover:not(:disabled),
+.speak:focus-visible {
+  background: color-mix(in srgb, var(--fg) 16%, transparent);
+}
+
+.speak svg {
+  width: 62%;
+  height: 62%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cone {
+  fill: currentColor;
+}
+
+/* while it plays, the button fills in and the sound waves pulse */
+.speak[data-state="playing"] {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.speak[data-state="playing"] .w1,
+.speak[data-state="playing"] .w2 {
+  animation: pulse 0.9s ease-in-out infinite;
+}
+
+.speak[data-state="playing"] .w2 {
+  animation-delay: 0.25s;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.speak:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speak,
+  .speak[data-state="playing"] .w1,
+  .speak[data-state="playing"] .w2 {
+    transition: none;
+    animation: none;
+  }
+}

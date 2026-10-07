@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import DishArt from "../dishes/DishArt";
+import Speak from "../speech/Speak";
 import RegionToggle from "../ui/RegionToggle";
 import type { Ingredient, Recipe, RecipeId } from "./data";
 import styles from "./Recipes.module.css";
@@ -91,7 +92,7 @@ export default function Recipes({ recipes }: { recipes: Recipe[] }) {
 
         <div className={styles.main}>
           <h3 lang="vi">{r.vi}</h3>
-          <p className={styles.say} lang="en">say “{r.say}”</p>
+          <p className={styles.say} lang="en">say “{r.say}” <Speak text={r.vi} /></p>
           <p className={styles.en} lang="en">{r.en}</p>
           <p className={styles.intro} lang="en">{r.intro}</p>
 

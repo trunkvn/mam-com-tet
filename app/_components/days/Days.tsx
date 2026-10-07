@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Speak from "../speech/Speak";
 import DayIcon from "./DayIcon";
 import type { Day } from "./data";
 import styles from "./Days.module.css";
@@ -182,7 +183,7 @@ export default function Days({ days }: { days: Day[] }) {
               <div className={styles.ic}><DayIcon name={d.icon} /></div>
               {d.varies && <p className={styles.tag} lang="en">Date varies</p>}
               <h3 lang="vi">{d.vi}</h3>
-              <p className={styles.say} lang="en">say “{d.say}”</p>
+              <p className={styles.say} lang="en">say “{d.say}” <Speak text={d.vi} /></p>
               <p className={styles.en} lang="en">{d.en}</p>
               <p className={styles.body} lang="en">{d.body}</p>
               <ul className={styles.chips} lang="en" aria-label="On the tray">

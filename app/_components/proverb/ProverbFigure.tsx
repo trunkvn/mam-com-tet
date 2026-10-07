@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Speak from "../speech/Speak";
 import styles from "./Proverb.module.css";
 
 /** A drawing on one side and a proverb on the other, in the page's usual three languages of help:
@@ -25,7 +26,7 @@ export default function ProverbFigure({
         <blockquote lang="vi">
           <p className={styles.vi}>{vi}</p>
         </blockquote>
-        <p className={styles.say} lang="en">say “{say}”</p>
+        <p className={styles.say} lang="en">say “{say}” <Speak text={vi} /></p>
         <p className={styles.en} lang="en">{en}</p>
         <figcaption className={styles.cap} lang="en">{cap}</figcaption>
         <p className={styles.ours} lang="en">{ours}</p>

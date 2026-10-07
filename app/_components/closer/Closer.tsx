@@ -1,3 +1,5 @@
+import Speak from "../speech/Speak";
+import { PHRASES } from "../speech/phrases";
 import { SOURCES, WISHES } from "./data";
 import styles from "./Closer.module.css";
 
@@ -44,7 +46,7 @@ export default function Closer() {
           </h2>
         </div>
         <p className={styles.enline} lang="en">
-          “Happy New Year”
+          “Happy New Year” <Speak text={PHRASES.newYear} />
         </p>
         <p className={styles.lead} lang="en">
           There is always room for one more bowl. Come in, sit down, and eat
@@ -55,7 +57,7 @@ export default function Closer() {
           {WISHES.map((w) => (
             <li key={w.vi}>
               <b lang="vi">{w.vi}</b>
-              <i lang="en">say “{w.say}”</i>
+              <i lang="en">say “{w.say}” <Speak text={w.vi} /></i>
               <span lang="en">{w.en}</span>
             </li>
           ))}

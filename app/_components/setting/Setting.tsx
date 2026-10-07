@@ -4,6 +4,7 @@ import Embers from "./Embers";
 import Incense from "./Incense";
 import styles from "./Setting.module.css";
 import ProverbFigure from "../proverb/ProverbFigure";
+import { PHRASES } from "../speech/phrases";
 import Spring from "../proverb/Spring";
 import Tray from "./Tray";
 
@@ -38,7 +39,7 @@ export default function Setting() {
         <div className={styles.thanks}>
           <ProverbFigure
             art={<Spring />}
-            vi="Uống nước nhớ nguồn."
+            vi={PHRASES.gratitude}
             say="oo-ung nook nyuh nwon"
             en="When you drink the water, remember the spring."
             cap="Tục ngữ · a Vietnamese proverb, on gratitude to those who came before"

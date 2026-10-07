@@ -4,6 +4,8 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import DishArt from "../dishes/DishArt";
 import type { Dish, Region, RegionId } from "../dishes/data";
+import Speak from "../speech/Speak";
+import { PHRASES } from "../speech/phrases";
 import RegionToggle from "../ui/RegionToggle";
 import Sun from "./Sun";
 import styles from "./Setting.module.css";
@@ -245,7 +247,7 @@ export default function Tray({ regions }: { regions: Region[] }) {
               <span className={styles.stepNo}>{pad(i + 1)}</span>
               <p className={styles.stepMeta} lang="en">{stepMeta(dishes, i)}</p>
               <h3 lang="vi">{d.vi}</h3>
-              <p className={styles.say} lang="en">say “{d.say}”</p>
+              <p className={styles.say} lang="en">say “{d.say}” <Speak text={d.vi} /></p>
               <p className={styles.en} lang="en">{d.en}</p>
               <p className={styles.q} lang="en">“{d.quote}”</p>
               <p className={styles.txt} lang="en">{d.body}</p>
@@ -270,21 +272,21 @@ export default function Tray({ regions }: { regions: Region[] }) {
             <p className={styles.en} lang="en">“Offered, then shared.”</p>
             <ol className={styles.rite} lang="en">
               <li>
-                <b>Cúng <i>say “koong”</i></b>
+                <b>Cúng <i>say “koong”</i> <Speak text={PHRASES.rites[0]} /></b>
                 <span>
                   At midnight the family lights incense and offers the tray at the ancestral altar,
                   inviting the ancestors to the first meal of the year.
                 </span>
               </li>
               <li>
-                <b>Hạ lễ <i>say “hah leh”</i></b>
+                <b>Hạ lễ <i>say “hah leh”</i> <Speak text={PHRASES.rites[1]} /></b>
                 <span>
                   Once the incense has burned down (how long varies by family), the rite is
                   reported complete and the tray is taken down.
                 </span>
               </li>
               <li>
-                <b>Thụ lộc <i>say “too lohk”</i></b>
+                <b>Thụ lộc <i>say “too lohk”</i> <Speak text={PHRASES.rites[2]} /></b>
                 <span>
                   The family then eats the food together. Lộc means blessing, so the offering is
                   shared, not thrown away.
@@ -301,7 +303,7 @@ export default function Tray({ regions }: { regions: Region[] }) {
                     <li key={b.vi}>
                       <i><DishArt art={b.art} /></i>
                       <span>
-                        <b>{b.vi}</b> <em>say “{b.say}”</em>
+                        <b>{b.vi}</b> <em>say “{b.say}”</em> <Speak text={b.vi} />
                         <small>{b.note}</small>
                       </span>
                     </li>

@@ -6,6 +6,9 @@
   /* the region switch picks these up */
   --toggle-fg: var(--red-700);
   --toggle-bg: var(--cream);
+  /* and so does the speaker button */
+  --speak-fg: var(--red-700);
+  --speak-bg: var(--cream);
   /* Vietnamese words inside English text: dark red on the cream paper */
   --vi: var(--red-700);
 }

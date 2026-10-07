@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "audio": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-audio.mjs"
   },
   "dependencies": {
     "next": "16.3.8",

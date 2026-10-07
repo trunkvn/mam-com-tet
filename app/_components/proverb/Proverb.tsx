@@ -1,3 +1,4 @@
+import { PHRASES } from "../speech/phrases";
 import Bloom from "./Bloom";
 import Bridge from "./Bridge";
 import ProverbFigure from "./ProverbFigure";
@@ -9,7 +10,7 @@ export default function Proverb() {
       <div className="wrap">
         <ProverbFigure
           art={<Bloom />}
-          vi="Lời chào cao hơn mâm cỗ."
+          vi={PHRASES.welcome}
           say="luh-ee chow · kow hurn · muhm kaw"
           en="A greeting is worth more than a feast."
           cap="Tục ngữ · a Vietnamese proverb, on welcoming guests"
